@@ -28,20 +28,28 @@
 .skill {
     text-align: center;
     margin: 20px;
+    transition: transform 0.3s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
 .marble {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
     border-radius: 50%;
     width: 70px;
     height: 70px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.marble:hover {
+    transform: scale(2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .marble-icon {
@@ -49,8 +57,16 @@
     height: auto;
 }
 
-.hover-container {
-    width: 100%;
+.info-container {
+    position: absolute;
+    top: 0;
+    right: -150px; /* Adjust the distance from the right */
+    width: 150px; /* Adjust the width */
     height: 100%;
+    background: #0563bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: right 0.3s ease-in-out;
 }
 
