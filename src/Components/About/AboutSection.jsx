@@ -21,7 +21,7 @@ const AboutSection = () => {
         <div className="row">
           <div className="col-lg-4">
             <img
-              src="assets/img/profile-img.jpg"
+              src="../../assets/img/profile-img.jpg"
               className="img-fluid profilepic"
               alt=""
             />

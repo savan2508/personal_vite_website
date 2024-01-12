@@ -55,7 +55,7 @@ export const SkillsSection = () => {
           <p>{content}</p>
         </div>
 
-        <div className="row skills-content">
+        <div className="skills-content">
           {skills.map((skill, index) => (
             <Skill
               key={`skill-${index}`}
