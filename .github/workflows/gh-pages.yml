@@ -14,6 +14,8 @@ permissions:
   contents: read
   pull-requests: read
   issues: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: 'pages'
@@ -34,7 +36,7 @@ jobs:
           path: ./dist
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/deploy-pages@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
