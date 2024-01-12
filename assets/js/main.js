@@ -2,25 +2,25 @@
 const hero = document.getElementById('hero');
 
 // Define an array of background videos or images
-const backgrounds = [
-  { type: 'video', source: './assets/video/video1.mp4'},
-  { type: 'video', source: './assets/video/video2.mp4'},
-  { type: 'video', source: './assets/video/video3.mp4'},
-  { type: 'video', source: './assets/video/video4.mp4'},
-  { type: 'video', source: './assets/video/video5.mp4'},
-  { type: 'video', source: './assets/video/video6.mp4'},
-  { type: 'video', source: './assets/video/video7.mp4'},
-  { type: 'video', source: './assets/video/video8.mp4'},
-  { type: 'video', source: './assets/video/video9.mp4'},
-  { type: 'video', source: './assets/video/video10.mp4'},
-  { type: 'image', source: './assets/img/background_image/img1.jpg'},
-  { type: 'image', source: './assets/img/background_image/img2.jpg'},
-  { type: 'image', source: './assets/img/background_image/img3.jpg'},
-  { type: 'image', source: './assets/img/background_image/img4.jpg'},
-  { type: 'image', source: './assets/img/background_image/img5.jpg'},
-  { type: 'image', source: './assets/img/background_image/img6.jpg'},
-  // Add more backgrounds as needed
-];
+// const backgrounds = [
+//   { type: 'video', source: './assets/video/video1.mp4'},
+//   { type: 'video', source: './assets/video/video2.mp4'},
+//   { type: 'video', source: './assets/video/video3.mp4'},
+//   { type: 'video', source: './assets/video/video4.mp4'},
+//   { type: 'video', source: './assets/video/video5.mp4'},
+//   { type: 'video', source: './assets/video/video6.mp4'},
+//   { type: 'video', source: './assets/video/video7.mp4'},
+//   { type: 'video', source: './assets/video/video8.mp4'},
+//   { type: 'video', source: './assets/video/video9.mp4'},
+//   { type: 'video', source: './assets/video/video10.mp4'},
+//   { type: 'image', source: './assets/img/background_image/img1.jpg'},
+//   { type: 'image', source: './assets/img/background_image/img2.jpg'},
+//   { type: 'image', source: './assets/img/background_image/img3.jpg'},
+//   { type: 'image', source: './assets/img/background_image/img4.jpg'},
+//   { type: 'image', source: './assets/img/background_image/img5.jpg'},
+//   { type: 'image', source: './assets/img/background_image/img6.jpg'},
+//   // Add more backgrounds as needed
+// ];
 
 // Get references to HTML elements
 const backgroundBtn = document.getElementById('background-btn');
@@ -82,7 +82,7 @@ function changeBackground() {
     var backgroundImage6 = "./assets/img/background_image/img6.jpg";
     if (isMobile && randomBackground.source === backgroundImage6) {
       hero.style.backgroundPosition = "left top";
-    };
+    }
   }
 }
 
@@ -111,7 +111,7 @@ function readMoreFunc(fullText, readMoreBtn) {
     fullText.style.display = 'none';
     readMoreBtn.textContent = 'Read More';
   }
-};
+}
 
 
 (function() {
