@@ -1,0 +1,129 @@
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation
+*/
+.nav-menu {
+    display: block;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-menu .mobile-menu-visible {
+    transform: translateX(0);
+}
+
+.nav-menu * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-menu > ul > li {
+    position: relative;
+    white-space: nowrap;
+}
+
+.nav-menu a,
+.nav-menu a:focus {
+    font-size: 15px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    margin-bottom: 8px;
+    padding: 10px 18px;
+    transition: 0.3s;
+    transition: 0.3s;
+    color: #45505b;
+    border-radius: 50px;
+    background: #f2f3f5;
+}
+
+.nav-menu a i,
+.nav-menu a:focus i {
+    font-size: 20px;
+}
+
+.nav-menu a span,
+.nav-menu a:focus span {
+    padding: 0 5px 0 7px;
+    color: #45505b;
+}
+
+@media (min-width: 992px) {
+    .nav-menu a,
+    .nav-menu a:focus {
+        width: 56px;
+    }
+
+    .nav-menu a span,
+    .nav-menu a:focus span {
+        display: none;
+        color: #fff;
+    }
+}
+
+.nav-menu a:hover,
+.nav-menu .active,
+.nav-menu .active:focus,
+.nav-menu li:hover > a {
+    color: #fff;
+    background: #0563bb;
+}
+
+.nav-menu a:hover span,
+.nav-menu .active span,
+.nav-menu .active:focus span,
+.nav-menu li:hover > a span {
+    color: #fff;
+}
+
+.nav-menu a:hover,
+.nav-menu li:hover > a {
+    width: 100%;
+    color: #fff;
+}
+
+.nav-menu a:hover span,
+.nav-menu li:hover > a span {
+    display: block;
+}
+
+/**
+* Mobile Navigation
+*/
+.mobile-nav-toggle {
+    font-size: 28px;
+    line-height: 0;
+    position: fixed;
+    z-index: 9998;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.4s;
+    border: 0;
+    border-radius: 50px;
+    outline: none !important;
+    background: none;
+}
+
+.mobile-nav-toggle i {
+    color: #45505b;
+}
+
+.mobile-nav-active {
+    overflow: hidden;
+}
+
+.mobile-nav-active #header {
+    left: 0;
+}
+
+.mobile-nav-active .mobile-nav-toggle {
+    color: #fff;
+    background-color: #0563bb;
+}

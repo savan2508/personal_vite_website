@@ -9,10 +9,28 @@ const HeroSection = () => {
     "./assets/video/video1.mp4",
   );
   const [hereSectionStyle, setHeroSectionStyle] = useState({});
+  const [showChangeBackground, setShowChangeBackground] = useState(true);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
+
+    const handleScroll = () => {
+      setShowChangeBackground(window.scrollY < 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const backgrounds = [
     { type: "video", source: "./assets/video/video1.mp4" },
@@ -131,9 +149,11 @@ const HeroSection = () => {
         </div>
       </div>
       <div id="background-btn">
-        <button className="btn btn-primary" onClick={changeBackground}>
-          Change Background
-        </button>
+        {showChangeBackground && (
+          <button className="btn btn-primary" onClick={changeBackground}>
+            Change Background
+          </button>
+        )}
       </div>
     </section>
   );
