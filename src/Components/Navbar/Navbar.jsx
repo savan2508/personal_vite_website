@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  // const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     // Easy on scroll event listener
@@ -53,26 +54,24 @@ const Navbar = () => {
     });
   };
 
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setShowBackToTop(window.scrollY > 0);
+  //   };
+  //
+  //   window.addEventListener("scroll", handleScroll);
+  //
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  //
+  // const scrollToTop = () => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   const handleNavItemClick = (e) => {
     if (e.target.classList.contains("scrollto")) {
@@ -132,16 +131,16 @@ const Navbar = () => {
         </ul>
       </nav>
       {/* .nav-menu */}
-      {showBackToTop && (
-        <div
-          className={`back-to-top d-flex align-items-center justify-content-center ${
-            window.scrollY > 100 ? "active" : ""
-          }`}
-          onClick={scrollToTop}
-        >
-          <i className="bi bi-arrow-up-short"></i>
-        </div>
-      )}
+      {/*{showBackToTop && (*/}
+      {/*  <div*/}
+      {/*    className={`back-to-top d-flex align-items-center justify-content-center ${*/}
+      {/*      window.scrollY > 100 ? "active" : ""*/}
+      {/*    }`}*/}
+      {/*    onClick={scrollToTop}*/}
+      {/*  >*/}
+      {/*    <i className="bi bi-arrow-up-short"></i>*/}
+      {/*  </div>*/}
+      {/*)}*/}
     </header>
   );
 };

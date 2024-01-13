@@ -148,13 +148,21 @@ const HeroSection = () => {
           </a>
         </div>
       </div>
-      <div id="background-btn">
-        {showChangeBackground && (
+      {showChangeBackground ? (
+        <div id="background-btn">
           <button className="btn btn-primary" onClick={changeBackground}>
             Change Background
           </button>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div
+          className={`back-to-top d-flex align-items-center justify-content-center active 
+            `}
+          onClick={scrollToTop}
+        >
+          <i className="bi bi-arrow-up-short"></i>
+        </div>
+      )}
     </section>
   );
 };
