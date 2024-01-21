@@ -11,9 +11,9 @@ import "./App.scss";
 function App() {
   return (
     <>
-      <Navbar />
       <HeroSection />
       <main id="main" className="app">
+        <Navbar />
         <AboutSection />
         <Facts />
         <Work />
