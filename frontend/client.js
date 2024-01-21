@@ -1,14 +1,8 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-const projectId = process.env.REACT_SANITY_APP_ID;
-const projectToken = process.env.REACT_SANITY_TOKEN;
-
-console.log(projectId);
-console.log(projectToken);
+const projectId = import.meta.env.VITE_REACT_SANITY_APP_ID;
+const projectToken = import.meta.env.VITE_REACT_SANITY_TOKEN;
 
 export const client = createClient({
   projectId: projectId,
@@ -17,3 +11,7 @@ export const client = createClient({
   useCdn: true,
   token: projectToken,
 });
+
+const builder = imageUrlBuilder(client);
+
+export const urlFor = (source) => builder.image(source);
