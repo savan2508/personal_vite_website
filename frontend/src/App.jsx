@@ -1,20 +1,25 @@
 import HeroSection from "./Components/Hero/HeroSection.jsx";
-import AboutSection from "./Components/About/AboutSection.jsx";
+import AboutSection from "./container/About/AboutSection.jsx";
 import Facts from "./Components/Facts/Facts.jsx";
-import { SkillsSection } from "./Components/Skills/Skills.jsx";
+import { SkillsSection } from "./container/Skills/Skills.jsx";
 import { ResumeSection } from "./Components/Resume/ResumeSection.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
+import { Work } from "./container/work/Work.jsx";
+import { Footer } from "./container/footer/Footer.jsx";
+import "./App.scss";
 
 function App() {
   return (
     <>
       <Navbar />
       <HeroSection />
-      <main id="main">
+      <main id="main" className="app">
         <AboutSection />
         <Facts />
+        <Work />
         <SkillsSection />
         <ResumeSection />
+        <Footer />
       </main>
     </>
   );

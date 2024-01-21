@@ -1,6 +1,7 @@
 import SkillData from "../../data/skillData.js";
 import "./skills.styles.css";
 import { useState } from "react";
+import "./skills.scss";
 
 const Skill = ({ name, icon, id, onMouseOver, onMouseOut }) => {
   const [isHovered, setIsHovered] = useState(false);
