@@ -22,8 +22,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VITE_REACT_SANITY_APP_ID=${{ secrets.REACT_SANITY_APP_ID }}
-  VITE_REACT_SANITY_TOKEN=${{ secrets.REACT_SANITY_TOKEN }}
+  VITE_REACT_SANITY_APP_ID: ${{ secrets.REACT_SANITY_APP_ID }}
+  VITE_REACT_SANITY_TOKEN: ${{ secrets.REACT_SANITY_TOKEN }}
 
 jobs:
   deploy:
