@@ -20,6 +20,10 @@ export const Work = () => {
   const handleWorkFilter = () => {};
   return (
     <>
+      <h2 className="head-text">
+        My Creative <span>Portfolio</span> Section
+      </h2>
+
       <div className="app__work-filter">
         {["UT/UX", "Mobile App", "React JS", "All"].map((item, index) => (
           <div
@@ -76,7 +80,6 @@ export const Work = () => {
               <p className="p-text" style={{ marginTop: 10 }}>
                 {work.description}
               </p>
-
               <div className="app__work-tag app__flex">
                 <p className="p-text">{work.tags[0]}</p>
               </div>
