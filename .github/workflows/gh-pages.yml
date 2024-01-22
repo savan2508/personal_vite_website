@@ -35,6 +35,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          working-directory: ./frontend
           cache: 'yarn'
 
       - name: Set Environment Variables
