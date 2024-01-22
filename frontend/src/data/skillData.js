@@ -2,7 +2,7 @@ const skillsData = {
   title: "Skills",
   content:
     "In my professional career, I have developed a versatile skill set that includes both leadership and collaboration abilities. I am equally adept at working collaboratively as a team player on large-scale projects, as well as taking initiative and leading teams towards successful outcomes. My soft skills include contract negotiation, public speaking, project planning, and project management. These abilities have helped me to effectively communicate with stakeholders, create project plans, and manage resources to achieve project objectives. Please see below for a list of my technical skills.",
-  skills: [
+  skillsLocal: [
     {
       name: "Python",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg",
