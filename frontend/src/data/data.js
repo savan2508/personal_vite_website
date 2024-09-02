@@ -28,15 +28,14 @@ export const aboutData = {
     phone: "+1(813) 452-0870",
     city: "Tampa, FL",
     age: 28,
-    degree: "Masters in Data Analytics",
+    degree: "Masters in Computer Science",
     email: "savanpatel4724@gmail.com",
     freelance: "Available",
   },
   seekingOpportunities: `I am currently seeking job/internship opportunities in the
     programming field, particularly in machine learning, game development, or web
     development. If you are interested in learning more about my skills and
-    experience, please feel free to explore my website and get in touch. I am always
-    looking for new opportunities to collaborate and create amazing things!`,
+    experience, please feel free to explore my website and get in touch.`,
 };
 
 export const factsData = {

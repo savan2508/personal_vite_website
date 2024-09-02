@@ -49,8 +49,8 @@ const AboutSection = () => {
             </motion.div>
           ))}
         </div>
+        {/*<TempAbout />*/}
       </div>
-      <TempAbout />
     </section>
   );
 };
@@ -59,13 +59,6 @@ const TempAbout = () => {
   return (
     <>
       <div className="row">
-        <div className="col-lg-4">
-          <img
-            src="../../assets/img/profile-img.jpg"
-            className="img-fluid profilepic"
-            alt=""
-          />
-        </div>
         <div className="col-lg-8 pt-4 pt-lg-0 content">
           {programmingContent.map((item, index) => (
             <div key={index}>
@@ -81,10 +74,6 @@ const TempAbout = () => {
               <ul>
                 <li>
                   <i className="bi bi-chevron-right"></i>
-                  <strong>Birthday:</strong> <span>{contactInfo.birthday}</span>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right"></i>
                   <strong>Phone:</strong> <span>{contactInfo.phone}</span>
                 </li>
                 <li>
@@ -95,10 +84,6 @@ const TempAbout = () => {
             </div>
             <div className="col-lg-6">
               <ul>
-                <li>
-                  <i className="bi bi-chevron-right"></i> <strong>Age:</strong>
-                  <span>{contactInfo.age}</span>
-                </li>
                 <li>
                   <i className="bi bi-chevron-right"></i>
                   <strong>Degree:</strong>
@@ -117,7 +102,6 @@ const TempAbout = () => {
               </ul>
             </div>
           </div>
-
           <p style={{ textAlign: "justify" }}>{seekingOpportunities}</p>
         </div>
       </div>

@@ -7,8 +7,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-left: 20%;
-    margin-right: 20%;
 }
 
 @media (max-width: 1200px) {
