@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./navbar.styles.css";
 
 const Navbar = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);

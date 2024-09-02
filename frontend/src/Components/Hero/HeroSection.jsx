@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./HeroSection.style.css";
 import ReactTyped from "react-typed";
+import { backgrounds } from "../../data/backgrounds.js";
 
 const HeroSection = () => {
   const [videoSourceLink, setVideoSourceLink] = useState(
-    "./assets/video/video1.mp4",
+    "./assets/video/video2.mp4",
   );
   const [hereSectionStyle, setHeroSectionStyle] = useState({});
   const [showChangeBackground, setShowChangeBackground] = useState(true);
+
+  const videoRef = useRef(null);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -32,33 +35,12 @@ const HeroSection = () => {
     });
   };
 
-  const backgrounds = [
-    { type: "video", source: "./assets/video/video1.mp4" },
-    { type: "video", source: "./assets/video/video2.mp4" },
-    { type: "video", source: "./assets/video/video3.mp4" },
-    { type: "video", source: "./assets/video/video4.mp4" },
-    { type: "video", source: "./assets/video/video5.mp4" },
-    { type: "video", source: "./assets/video/video6.mp4" },
-    { type: "video", source: "./assets/video/video7.mp4" },
-    { type: "video", source: "./assets/video/video8.mp4" },
-    { type: "video", source: "./assets/video/video9.mp4" },
-    { type: "video", source: "./assets/video/video10.mp4" },
-    { type: "image", source: "./assets/img/background_image/img1.jpg" },
-    { type: "image", source: "./assets/img/background_image/img2.jpg" },
-    { type: "image", source: "./assets/img/background_image/img3.jpg" },
-    { type: "image", source: "./assets/img/background_image/img4.jpg" },
-    { type: "image", source: "./assets/img/background_image/img5.jpg" },
-    { type: "image", source: "./assets/img/background_image/img6.jpg" },
-  ];
-
   const changeBackground = () => {
     const randomBackground =
       backgrounds[Math.floor(Math.random() * backgrounds.length)];
-    const videoElement = document.getElementById("background-video");
     const transitionStyle = {
       transition: "background 1s ease-in, background-image 1s ease-in",
     };
-    console.log(randomBackground);
 
     if (randomBackground.type === "video") {
       setHeroSectionStyle({
@@ -66,12 +48,9 @@ const HeroSection = () => {
         background: "none",
       });
       setVideoSourceLink(randomBackground.source);
-      videoElement.load();
     } else if (randomBackground.type === "image") {
       // Handle image background change
       setVideoSourceLink("");
-      videoElement.load();
-
       setHeroSectionStyle({
         ...transitionStyle,
         backgroundImage: `url(${randomBackground.source})`,
@@ -84,6 +63,18 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      console.log("Video loaded");
+      videoRef.current.play().catch((error) => {
+        if (error.name !== "AbortError") {
+          console.error("Video play error:", error);
+        }
+      });
+    }
+  }, [videoSourceLink]);
+
+  useEffect(() => {
     // Call the changeBackground() function on load to get a random background on each load.
     changeBackground();
   }, []);
@@ -94,7 +85,14 @@ const HeroSection = () => {
       className="d-flex flex-column justify-content-center"
       style={hereSectionStyle}
     >
-      <video id="background-video" autoPlay loop muted playsInline>
+      <video
+        id="hero-background-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        ref={videoRef}
+      >
         <source id="video-source" src={videoSourceLink} type="video/mp4" />
         {/* Fallback content for non-supported browsers */}
         Your browser does not support the video tag.

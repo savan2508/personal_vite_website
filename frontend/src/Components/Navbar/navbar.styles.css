@@ -39,7 +39,7 @@
     transition: 0.3s;
     color: #45505b;
     border-radius: 50px;
-    /*background: #f2f3f5;*/
+    background: #f2f3f5;
 }
 
 .nav-menu a i,
@@ -62,7 +62,7 @@
     .nav-menu a span,
     .nav-menu a:focus span {
         display: none;
-        /*color: #fff;*/
+        color: #fff;
     }
 }
 
@@ -70,7 +70,7 @@
 .nav-menu .active,
 .nav-menu .active:focus,
 .nav-menu li:hover > a {
-    /*color: #fff;*/
+    color: #fff;
     background: #0563bb;
 }
 
@@ -78,13 +78,13 @@
 .nav-menu .active span,
 .nav-menu .active:focus span,
 .nav-menu li:hover > a span {
-    /*color: #fff;*/
+    color: #fff;
 }
 
 .nav-menu a:hover,
 .nav-menu li:hover > a {
     width: 100%;
-    /*color: #fff;*/
+    color: #fff;
 }
 
 .nav-menu a:hover span,
