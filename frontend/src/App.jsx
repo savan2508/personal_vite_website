@@ -7,6 +7,7 @@ import { Work } from "./container/work/Work.jsx";
 import { Footer } from "./container/footer/Footer.jsx";
 import "./App.scss";
 import { SkillsSection } from "./container/Skills/SkillSection.jsx";
+import { Certifications } from "./container/Certifications/Certifications.jsx";
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
         <Navbar />
         <AboutSection />
         <Facts />
-        <Work />
         <SkillsSection />
         <ResumeSection />
+        <Work />
+        <Certifications />
         <Footer />
       </main>
     </>

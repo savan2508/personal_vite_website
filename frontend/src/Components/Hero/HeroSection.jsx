@@ -58,6 +58,7 @@ const HeroSection = () => {
     const transitionStyle = {
       transition: "background 1s ease-in, background-image 1s ease-in",
     };
+    console.log(randomBackground);
 
     if (randomBackground.type === "video") {
       setHeroSectionStyle({
@@ -122,7 +123,7 @@ const HeroSection = () => {
               className="typed"
             />
           </p>
-          <div className="social-links">
+          <div className="hero-social-links">
             <a
               href="https://github.com/savan2508"
               className="github"

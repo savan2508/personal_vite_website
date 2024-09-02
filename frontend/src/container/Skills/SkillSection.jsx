@@ -7,20 +7,20 @@ export const SkillsSection = () => {
   const { title, content, skillsLocal } = SkillData;
   const [skills, setSkills] = useState(skillsLocal);
 
-  console.log(skills);
-
   useEffect(() => {
-    const skillsQuery = '*[_type == "skills"]';
-
-    client.fetch(skillsQuery).then((data) => {
-      console.log(data.length, skillsLocal.length);
-      if (data.length > skillsLocal.length) {
-        setSkills(data);
+    const fetchSkills = async () => {
+      try {
+        const skillsQuery = '*[_type == "skills"]';
+        const fetchedData = await client.fetch(skillsQuery);
+        const combinedSkills = [...skillsLocal, ...fetchedData];
+        setSkills(combinedSkills);
+      } catch (error) {
+        console.error("Error fetching skills:", error);
       }
-    });
-  }, []);
+    };
 
-  console.log(skills);
+    fetchSkills();
+  }, []);
 
   const handleMouseOver = (index) => {
     // Add your animation logic here
@@ -53,7 +53,7 @@ export const SkillsSection = () => {
               id={index}
               {...skill}
               name={skill.name}
-              icon={skill.icon}
+              icon={skill.icon_url ? skill.icon_url : skill.icon}
               onMouseOver={handleMouseOver}
               onMouseOut={handleMouseOut}
             />

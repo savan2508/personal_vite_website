@@ -10,6 +10,7 @@ export const client = createClient({
   apiVersion: "2022-02-01",
   useCdn: true,
   token: projectToken,
+  ignoreBrowserTokenWarning: true,
 });
 
 const builder = imageUrlBuilder(client);

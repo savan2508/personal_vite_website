@@ -1,101 +1,63 @@
 import "./footer.scss";
-import { client } from "../../../client.js";
 import { images } from "../../constants/index.js";
-import { useState } from "react";
+import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
 
 export const Footer = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const { username, email, message } = formData;
-
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = () => {
-    setLoading(true);
-
-    const contact = {
-      _type: "contact",
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
-    };
-
-    client
-      .create(contact)
-      .then(() => {
-        setLoading(false);
-        setIsFormSubmitted(true);
-      })
-      .catch((err) => console.log(err));
-  };
-
   return (
     <>
-      <h2 className="head-text">Take a coffee & chat with me</h2>
-
-      <div className="app__footer-cards">
-        <div className="app__footer-card ">
-          <img src={images.email} alt="email" />
-          <a href="mailto:sawanpatel2508@gmail.com" className="p-text">
-            sawanpatel2508@gmail.com
-          </a>
+      <section id="contact" className="contact">
+        <h2 className="head-text">Contact Me</h2>
+        <div className="app__footer-cards">
+          <div className="app__footer-card ">
+            <img src={images.email} alt="email" />
+            <a href="mailto:sawanpatel2508@gmail.com" className="p-text">
+              sawanpatel2508@gmail.com
+            </a>
+          </div>
+          <div className="app__footer-card">
+            <img src={images.mobile} alt="phone" />
+            <a href="tel:+1 (813) 452-0870" className="p-text">
+              +1 (813) 452-0870
+            </a>
+          </div>
         </div>
-        <div className="app__footer-card">
-          <img src={images.mobile} alt="phone" />
-          <a href="tel:+1 (813) 452-0870" className="p-text">
-            +1 (813) 452-0870
-          </a>
+      </section>
+      <div id="footer">
+        <div className="container">
+          <h3>Savan Patel</h3>
+          <p style={{ textAlign: "center" }}>
+            Thank you for visiting my website. I would love to connect with you.
+            Please send me an email, call me, or send me a request on LinkedIn.
+          </p>
+          <div className="social-links">
+            <a href="https://github.com/savan2508" className="github">
+              <AiFillGithub />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/savan-patel-577a6669/"
+              className="linkedin"
+            >
+              <AiFillLinkedin />
+            </a>
+            <a href="mailto:savanpatel4724@gmail.com" className="email">
+              <AiOutlineMail />
+            </a>
+          </div>
         </div>
+        <p style={{ textAlign: "center", margin: "0" }}>Credits</p>
+        <a href="https://www.flaticon.com/free-animated-icons" title="icons">
+          icons created by - Flaticon
+        </a>
+        <a href="https://www.bootstrap.com" title="Style">
+          Style and CSS by - bootstrap
+        </a>
+        <a
+          href="https://www.flaticon.com/free-animated-icons/car"
+          title="car animated icons"
+        >
+          Car animated icons created by Freepik - Flaticon
+        </a>
       </div>
-      {!isFormSubmitted ? (
-        <div className="app__footer-form app__flex">
-          <div className="app__flex">
-            <input
-              className="p-text"
-              type="text"
-              placeholder="Your Name"
-              name="username"
-              value={username}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <div className="app__flex">
-            <input
-              className="p-text"
-              type="email"
-              placeholder="Your Email"
-              name="email"
-              value={email}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <div>
-            <textarea
-              className="p-text"
-              placeholder="Your Message"
-              value={message}
-              name="message"
-              onChange={handleChangeInput}
-            />
-          </div>
-          <button type="button" className="p-text" onClick={handleSubmit}>
-            {!loading ? "Send Message" : "Sending..."}
-          </button>
-        </div>
-      ) : (
-        <div>
-          <h3 className="head-text">Thank you for getting in touch!</h3>
-        </div>
-      )}
     </>
   );
 };
