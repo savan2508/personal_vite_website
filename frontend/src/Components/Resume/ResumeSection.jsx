@@ -5,19 +5,23 @@ const ResumeItem = ({ title, date, company, details }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <div className="resume-item">
-      <h4>
-        <a
-          data-bs-toggle="collapse"
-          href={`#${title.replace(/\s+/g, "").toLowerCase()}`}
-          role="button"
-          aria-expanded={!isCollapsed}
-          aria-controls={`${title.replace(/\s+/g, "").toLowerCase()}`}
-          onClick={() => setIsCollapsed(!isCollapsed)}
-        >
-          {title}
-        </a>
-      </h4>
-      <h5>{date}</h5>
+      {details.length > 0 ? (
+        <h4>
+          <a
+            data-bs-toggle="collapse"
+            href={`#${title.replace(/\s+/g, "").toLowerCase()}`}
+            role="button"
+            aria-expanded={!isCollapsed}
+            aria-controls={`${title.replace(/\s+/g, "").toLowerCase()}`}
+            onClick={() => setIsCollapsed(!isCollapsed)}
+          >
+            {title}
+          </a>
+        </h4>
+      ) : (
+        <h4>{title}</h4>
+      )}
+      {date && <h5>{date}</h5>}
       <p>
         <em>{company}</em>
       </p>
@@ -67,7 +71,7 @@ export const ResumeSection = () => {
               <ResumeItem
                 key={index}
                 title={edu.title}
-                date={edu.date}
+                date={null}
                 company={edu.institution}
                 details={[]}
               />

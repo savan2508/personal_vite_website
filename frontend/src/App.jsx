@@ -13,7 +13,6 @@ import { Loader } from "./Components/Loader/Loader.jsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  console.log(loading);
 
   useEffect(() => {
     const handleLoad = () => {
@@ -24,8 +23,13 @@ function App() {
 
     window.addEventListener("load", handleLoad);
 
+    const maxTimeout = setTimeout(handleLoad, 10000);
+
     // Cleanup the event listener when the component unmounts
-    return () => window.removeEventListener("load", handleLoad);
+    return () => {
+      document.removeEventListener("DOMContentLoaded", handleLoad);
+      clearTimeout(maxTimeout);
+    };
   }, []);
 
   if (loading) {

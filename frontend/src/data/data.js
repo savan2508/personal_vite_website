@@ -36,6 +36,10 @@ export const aboutData = {
     programming field, particularly in machine learning, game development, or web
     development. If you are interested in learning more about my skills and
     experience, please feel free to explore my website and get in touch.`,
+  socialLinks: {
+    github: "https://github.com/savan2508",
+    linkedIn: "https://www.linkedin.com/in/savanpatel2508",
+  },
 };
 
 export const factsData = {

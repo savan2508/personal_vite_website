@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import "./HeroSection.style.css";
 import ReactTyped from "react-typed";
 import { backgrounds } from "../../data/backgrounds.js";
+import { aboutData } from "../../data/data.js";
 
 const HeroSection = () => {
   const [videoSourceLink, setVideoSourceLink] = useState(
@@ -65,7 +66,6 @@ const HeroSection = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
-      console.log("Video loaded");
       videoRef.current.play().catch((error) => {
         if (error.name !== "AbortError") {
           console.error("Video play error:", error);
@@ -112,7 +112,8 @@ const HeroSection = () => {
               strings={[
                 " Software Engineer",
                 " Web Developer",
-                " Game Designer",
+                " Data Scientist",
+                " Project Manager",
               ]}
               typeSpeed={100}
               backSpeed={50}
@@ -123,7 +124,7 @@ const HeroSection = () => {
           </p>
           <div className="hero-social-links">
             <a
-              href="https://github.com/savan2508"
+              href={aboutData.socialLinks.github}
               className="github"
               target="_blank"
               rel="noreferrer"
@@ -131,7 +132,7 @@ const HeroSection = () => {
               <i className="bx bxl-github"></i>
             </a>
             <a
-              href="https://www.linkedin.com/in/savan-patel-577a6669/"
+              href={aboutData.socialLinks.linkedIn}
               className="linkedin"
               target="_blank"
               rel="noreferrer"
