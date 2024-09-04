@@ -54,9 +54,6 @@ export const Work = () => {
     });
   }, []);
 
-  console.log(works);
-  console.log(tags);
-
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
     setAnimateCard([{ y: 100, opacity: 0 }]);

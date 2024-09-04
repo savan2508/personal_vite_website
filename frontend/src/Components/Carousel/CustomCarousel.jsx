@@ -1,10 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "./custom-carousel.scss";
+import { createPortal } from "react-dom";
 
+// eslint-disable-next-line react/prop-types
 export const CustomCarousel = ({ isOpen, images, onClose }) => {
   if (!isOpen) return null;
-  return (
+  return createPortal(
     <>
       <div className="custom-carousel-overlay">
         <div className="custom-carousel-container">
@@ -32,6 +34,7 @@ export const CustomCarousel = ({ isOpen, images, onClose }) => {
           </Swiper>
         </div>
       </div>
-    </>
+    </>,
+    document.body,
   );
 };
