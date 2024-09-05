@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./HeroSection.style.css";
-import ReactTyped from "react-typed";
 import { backgrounds } from "../../data/backgrounds.js";
 import { aboutData } from "../../data/data.js";
+import { ReactTyped } from "react-typed";
 
 const HeroSection = () => {
   const [videoSourceLink, setVideoSourceLink] = useState(
