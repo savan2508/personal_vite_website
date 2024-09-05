@@ -22,8 +22,7 @@ export const SkillsSection = () => {
     fetchSkills();
   }, []);
 
-  const handleMouseOver = (index) => {
-    // Add your animation logic here
+  const handleMouseOver = (index, name) => {
     const marble = document.getElementById(`marble-${index}`);
     if (marble) {
       marble.classList.add("hovered");
@@ -31,7 +30,6 @@ export const SkillsSection = () => {
   };
 
   const handleMouseOut = (index) => {
-    // Add your reset animation logic here
     const marble = document.getElementById(`marble-${index}`);
     if (marble) {
       marble.classList.remove("hovered");
@@ -45,7 +43,6 @@ export const SkillsSection = () => {
           <h2>{title}</h2>
           <p>{content}</p>
         </div>
-
         <div className="skills-content">
           {skills.map((skill, index) => (
             <SkillIcon
@@ -54,7 +51,7 @@ export const SkillsSection = () => {
               {...skill}
               name={skill.name}
               icon={skill.icon_url ? skill.icon_url : skill.icon}
-              onMouseOver={handleMouseOver}
+              onMouseOver={() => handleMouseOver(index, skill.name)}
               onMouseOut={handleMouseOut}
             />
           ))}
