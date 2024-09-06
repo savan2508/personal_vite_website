@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { WorkCard } from "./WorkCard.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { CustomModal } from "../../Components/Modal/CustomModal.jsx";
+import { GridModal } from "../../Components/Modal/GridModal.jsx";
 
 export const Work = () => {
   const [works, setWorks] = useState([]);
@@ -15,6 +19,11 @@ export const Work = () => {
   const [tags, setTags] = useState(["All"]);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [currentSlide, setCurrentSlide] = useState(1);
+
+  const [showAllModal, setShowAllModal] = useState(false);
+
+  const handleShowAllModal = () => setShowAllModal(true);
+  const handleCloseAllModal = () => setShowAllModal(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,7 +47,7 @@ export const Work = () => {
     const query = `*[_type == "works"]{
   title,
   shortDescription,
-  description,
+  description[],
   "mainImage": imgUrl.asset->url,
   "screenshots": screenshots[].asset->url,
   projectLink,
@@ -78,7 +87,7 @@ export const Work = () => {
         <div className="app__work-filter">
           {tags.map((item, index) => (
             <div
-              key={index}
+              key={`work_filter_${index}`}
               onClick={() => handleWorkFilter(item)}
               className={`app__work-filter-item app__flex p-text ${activeFilter === item ? "item-active" : ""}`}
             >
@@ -90,6 +99,7 @@ export const Work = () => {
           animate={animateCard}
           transition={{ duration: 0.5, delayChildren: 0.5 }}
           className="app__work-portfolio"
+          key={`work_portfolio`}
         >
           <Swiper
             effect={isMobile ? "slide" : "coverflow"}
@@ -113,19 +123,39 @@ export const Work = () => {
                 : [Pagination, Navigation]
             }
             className="work_Swiper"
+            key={`work_swiper`}
           >
             {filterWork.map((work, index) => (
               <SwiperSlide key={`work_slider_${index}`}>
-                <div className="app__work-item app__flex" key={index}>
+                <div className="app__work-item app__flex">
                   <WorkCard work={work} />
                 </div>
               </SwiperSlide>
             ))}
-            <div className="slide-counter">
+            <div className="slide-counter" key={`slider-count`}>
               {currentSlide}/{filterWork.length}
             </div>
           </Swiper>
         </motion.div>
+        <div className="d-grid gap-2">
+          <Button
+            className="show-all-button"
+            variant="outline-primary"
+            onClick={handleShowAllModal}
+            key={`show-all-button`}
+          >
+            Show All {activeFilter === "All" ? "" : activeFilter} Projects
+          </Button>
+        </div>
+        {showAllModal && (
+          <GridModal
+            gridData={filterWork}
+            activeFilter={activeFilter}
+            handleCloseAllModal={handleCloseAllModal}
+            showAllModal={showAllModal}
+            key={`grid_modal`}
+          />
+        )}
       </section>
     </>
   );

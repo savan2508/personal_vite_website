@@ -80,7 +80,7 @@
 
 .app__work-img {
   width: 100%;
-  height: auto;
+  height: 200px;
   position: relative;
 
   img {
@@ -177,3 +177,8 @@
   font-weight: bold;
   color: #333;
 }
+
+.show-all-button {
+  margin: 0 5% 0 5%;
+}
+

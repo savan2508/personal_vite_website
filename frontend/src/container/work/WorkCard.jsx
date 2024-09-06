@@ -62,9 +62,9 @@ export const WorkCard = ({ work }) => {
 
   return (
     <>
-      <div onClick={handleCardClick}>
+      <div onClick={handleCardClick} key={`work-card-${work.title}`}>
         <div className="app__work-img app__flex">
-          <img src={urlFor(work.mainImage)} alt={work.name} />
+          <img src={urlFor(work.mainImage)} alt={work.name} loading="lazy" />
           <motion.div
             whileHover={{ opacity: [0, 1] }}
             transition={{
@@ -122,7 +122,7 @@ export const WorkCard = ({ work }) => {
           </motion.div>
         </div>
         <div className="app__work-content app__flex">
-          <h4 className="bold-text">{work.title}</h4>
+          <h4 className="bold-text">{work?.title}</h4>
           <p className="p-text" style={{ marginTop: 10 }}>
             {work.shortDescription}
           </p>
@@ -131,19 +131,24 @@ export const WorkCard = ({ work }) => {
           </div>
         </div>
       </div>
-      <CustomModal
-        modalIsOpen={modalIsOpen}
-        closeModal={closeModal}
-        description={work.description}
-        screenshots={work.screenshots}
-        title={work.title}
-        buttons={buttons}
-      />
-      <CustomCarousel
-        isOpen={isCarouselOpen}
-        images={work.screenshots}
-        onClose={handleCloseCarousel}
-      />
+      {modalIsOpen && (
+        <CustomModal
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          description={work.description}
+          screenshots={work.screenshots}
+          title={work.title}
+          buttons={buttons}
+        />
+      )}
+
+      {isCarouselOpen && (
+        <CustomCarousel
+          isOpen={isCarouselOpen}
+          images={work.screenshots}
+          onClose={handleCloseCarousel}
+        />
+      )}
     </>
   );
 };

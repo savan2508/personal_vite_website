@@ -59,6 +59,7 @@ export default {
       options: {
         layout: 'tags',
       },
+      validation: (Rule) => Rule.required().min(1).error('At least one tag is required'),
     },
     {
       name: 'publishedAt',
