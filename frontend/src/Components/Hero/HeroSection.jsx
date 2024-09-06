@@ -108,6 +108,7 @@ const HeroSection = () => {
           <p>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             I'm
+            <span> </span>
             <ReactTyped
               strings={[
                 " Software Engineer",
