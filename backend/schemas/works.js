@@ -9,6 +9,13 @@ export default {
       type: 'string',
     },
     {
+      name: 'priority',
+      title: 'Priority',
+      type: 'number',
+      description: 'Higher numbers indicate more impressive projects',
+      validation: (Rule) => Rule.required().min(1).max(1000),
+    },
+    {
       name: 'shortDescription',
       title: 'Short Description',
       type: 'string',

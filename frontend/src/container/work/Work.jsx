@@ -6,8 +6,6 @@ import { WorkCard } from "./WorkCard.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { CustomModal } from "../../Components/Modal/CustomModal.jsx";
 import { GridModal } from "../../Components/Modal/GridModal.jsx";
 
 export const Work = () => {
@@ -44,8 +42,9 @@ export const Work = () => {
   }, []);
 
   useEffect(() => {
-    const query = `*[_type == "works"]{
+    const query = `*[_type == "works"] | order(priority desc, title asc) {
   title,
+  priority,
   shortDescription,
   description[],
   "mainImage": imgUrl.asset->url,
@@ -77,7 +76,6 @@ export const Work = () => {
       }
     }, 500);
   };
-
   return (
     <>
       <section id="portfolio" className="portfolio">
