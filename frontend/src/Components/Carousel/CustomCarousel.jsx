@@ -27,6 +27,7 @@ export const CustomCarousel = ({ isOpen, images, onClose }) => {
                   <img
                     src={image}
                     alt={`Slide ${index}`}
+                    loading={"lazy"}
                     className="carousel-image"
                   />
                 </SwiperSlide>

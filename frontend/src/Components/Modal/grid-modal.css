@@ -1,0 +1,40 @@
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px)); /* Responsive columns */
+    gap: 20px;
+    justify-content: center; /* Center the grid */
+    padding: 20px; /* Add some padding around the grid */
+    margin: 0 auto; /* Center the grid */
+}
+
+.project-grid-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    aspect-ratio: 1 / 1.2; /* Change as needed to maintain the width and height ratio */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Rounded corners */
+}
+
+.project-grid-item:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    /* Ensure the card expands without affecting other items */
+    will-change: transform; /* Optimize for performance */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add a shadow effect on hover */
+}
+
+.project-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fits inside the card without distorting */
+}
+
+.project-grid-item p, .project-grid-item h3 {
+    margin: 10px 0; /* Ensure consistent padding inside the card */
+}
+
+/* Optional: Set a fixed height for the cards */
+.project-grid-item {
+    height: auto; /* Adjust this as necessary */
+}
+

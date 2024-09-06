@@ -93,6 +93,7 @@ export const Certifications = () => {
                       src={cert.imageUrl}
                       className="certification-img"
                       alt={cert.title}
+                      loading={"lazy"}
                     />
                   </a>
                   <a href={cert.course_link} target="_blank" rel="noreferrer">

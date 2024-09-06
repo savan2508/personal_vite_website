@@ -13,7 +13,7 @@ export const CustomModal = ({
   screenshots = [],
 }) => {
   return (
-    <Modal show={modalIsOpen} onHide={closeModal} centered>
+    <Modal show={modalIsOpen} onHide={closeModal} centered scrollable>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -35,8 +35,8 @@ export const CustomModal = ({
             }}
           />
         )}
-        <div className="custom-modal-screenshots">
-          {screenshots?.length > 0 && (
+        {screenshots?.length > 0 && (
+          <div className="custom-modal-screenshots">
             <Carousel>
               {screenshots.map((screenshot, index) => (
                 <Carousel.Item
@@ -46,13 +46,14 @@ export const CustomModal = ({
                   <img
                     className="d-block w-100 carousel-image-modal"
                     src={screenshot}
+                    loading="lazy"
                     alt={`Screenshot ${index + 1}`}
                   />
                 </Carousel.Item>
               ))}
             </Carousel>
-          )}
-        </div>
+          </div>
+        )}
       </Modal.Body>
       <Modal.Footer>
         {buttons?.map((button, index) => (
