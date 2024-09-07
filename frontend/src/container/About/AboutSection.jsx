@@ -1,19 +1,22 @@
-import { aboutData } from "../../data/data.js";
 import "./aboutsection.styles.css";
 import "./About.scss";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { urlFor, client } from "../../../client.js";
-
-const { title, content } = aboutData;
+import { PortableText } from "@portabletext/react";
 
 const AboutSection = () => {
   const [abouts, setAbouts] = useState([]);
+  const [aboutDescription, setAboutDescription] = useState([]);
 
   useEffect(() => {
-    const query = '*[_type == "abouts"]';
-    client.fetch(query).then((res) => {
+    const query1 = '*[_type == "abouts"]';
+    const query2 = '*[_type == "hero"]{description}';
+    client.fetch(query1).then((res) => {
       setAbouts(res);
+    });
+    client.fetch(query2).then((res) => {
+      setAboutDescription(res[0].description);
     });
   }, []);
 
@@ -21,8 +24,18 @@ const AboutSection = () => {
     <section id="about" className="about" data-aos="fade-up">
       <div className="container">
         <div className="section-title">
-          <h2>{title}</h2>
-          <p style={{ textAlign: "justify" }}>{content}</p>
+          <h2>ABOUT</h2>
+          {aboutDescription && (
+            <PortableText
+              value={aboutDescription}
+              components={{
+                block: {
+                  // Customize rendering of "normal" block styles
+                  normal: ({ children }) => <p>{children}</p>,
+                },
+              }}
+            />
+          )}
         </div>
         <div className="app__profiles">
           {abouts.map((about, index) => (

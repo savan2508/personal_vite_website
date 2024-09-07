@@ -5,11 +5,13 @@ import "./HeroSection.style.css";
 import { backgrounds } from "../../data/backgrounds.js";
 import { aboutData } from "../../data/data.js";
 import { ReactTyped } from "react-typed";
+import { client } from "../../../client.js";
 
 const HeroSection = () => {
   const [videoSourceLink, setVideoSourceLink] = useState(
     "./assets/video/video2.mp4",
   );
+  const [titles, setTitles] = useState([" Software Engineer"]);
   const [hereSectionStyle, setHeroSectionStyle] = useState({});
   const [showChangeBackground, setShowChangeBackground] = useState(true);
 
@@ -27,6 +29,18 @@ const HeroSection = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    // Fetch the job titles from Sanity
+    const fetchTitles = async () => {
+      const query = `*[_type == "hero"]{titles}`;
+      const result = await client.fetch(query);
+      if (result.length > 0) {
+        setTitles(result[0].titles);
+      }
+    };
+    fetchTitles();
   }, []);
 
   const scrollToTop = () => {
@@ -75,7 +89,6 @@ const HeroSection = () => {
   }, [videoSourceLink]);
 
   useEffect(() => {
-    // Call the changeBackground() function on load to get a random background on each load.
     changeBackground();
   }, []);
 
@@ -106,15 +119,10 @@ const HeroSection = () => {
         <div id="herotextbox" style={{ justifyContent: "left" }}>
           <h1>Savan Patel</h1>
           <p>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
             I'm
+            <span> </span>
             <ReactTyped
-              strings={[
-                " Software Engineer",
-                " Web Developer",
-                " Data Scientist",
-                " Project Manager",
-              ]}
+              strings={titles}
               typeSpeed={100}
               backSpeed={50}
               backDelay={2000}
