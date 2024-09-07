@@ -1,8 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
-import BlockContent from "@sanity/block-content-to-react";
 import "./custom-modal.scss";
+import { PortableText } from "@portabletext/react";
 
 export const CustomModal = ({
   modalIsOpen,
@@ -22,18 +22,11 @@ export const CustomModal = ({
           (typeof description === "string" ? (
             <p>{description}</p>
           ) : (
-            <BlockContent
-              blocks={description} // This is the array of blocks fetched from Sanity
-              serializers={{
-                types: {
-                  block: (props) => {
-                    // Render paragraphs
-                    if (props.node.style === "normal") {
-                      return <p>{props.children}</p>;
-                    }
-                    // Default for other block types
-                    return BlockContent.defaultSerializers.types.block(props);
-                  },
+            <PortableText
+              value={description}
+              components={{
+                block: {
+                  normal: ({ children }) => <p>{children}</p>,
                 },
               }}
             />
