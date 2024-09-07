@@ -8,11 +8,13 @@ import workExperience from './workExperience'
 import contact from './contact'
 import certification from './certification'
 import Hero from './Hero'
+import facts from './facts'
 
 export const schemaTypes = [
   Hero,
   testimonials,
   works,
+  facts,
   brands,
   abouts,
   experiences,

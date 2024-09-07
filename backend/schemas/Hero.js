@@ -15,8 +15,8 @@ export default {
       of: [{type: 'string'}],
     },
     {
-      name: 'description',
-      title: 'Description',
+      name: 'aboutDescription',
+      title: 'About Description',
       type: 'array',
       of: [{type: 'block'}],
     },
