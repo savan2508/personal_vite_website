@@ -1,6 +1,7 @@
 import "./grid-modal.css";
 import Modal from "react-bootstrap/Modal";
 import { WorkCard } from "../../container/work/WorkCard.jsx";
+import Button from "react-bootstrap/Button";
 
 export const GridModal = ({
   showAllModal,
@@ -14,6 +15,7 @@ export const GridModal = ({
         show={showAllModal}
         onHide={handleCloseAllModal}
         centered
+        scrollable
         size="lg"
       >
         <Modal.Header closeButton>
@@ -28,6 +30,9 @@ export const GridModal = ({
             ))}
           </div>
         </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleCloseAllModal}>Close</Button>
+        </Modal.Footer>
       </Modal>
     </>
   );
