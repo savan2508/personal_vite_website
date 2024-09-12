@@ -9,9 +9,11 @@ import contact from './contact'
 import certification from './certification'
 import Hero from './Hero'
 import facts from './facts'
+import resume from './resume'
 
 export const schemaTypes = [
   Hero,
+  resume,
   testimonials,
   works,
   facts,
