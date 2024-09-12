@@ -11,12 +11,12 @@ const AboutSection = () => {
 
   useEffect(() => {
     const query1 = '*[_type == "abouts"]';
-    const query2 = '*[_type == "hero"]{description}';
+    const query2 = '*[_type == "hero"]{aboutDescription}';
     client.fetch(query1).then((res) => {
       setAbouts(res);
     });
     client.fetch(query2).then((res) => {
-      setAboutDescription(res[0].description);
+      setAboutDescription(res[0].aboutDescription);
     });
   }, []);
 

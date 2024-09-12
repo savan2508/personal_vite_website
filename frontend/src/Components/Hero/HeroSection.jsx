@@ -3,7 +3,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./HeroSection.style.css";
 import { backgrounds } from "../../data/backgrounds.js";
-import { aboutData } from "../../data/data.js";
 import { ReactTyped } from "react-typed";
 import { client } from "../../../client.js";
 
@@ -12,6 +11,7 @@ const HeroSection = () => {
     "./assets/video/video2.mp4",
   );
   const [titles, setTitles] = useState([" Software Engineer"]);
+  const [hereData, setHereData] = useState([]);
   const [hereSectionStyle, setHeroSectionStyle] = useState({});
   const [showChangeBackground, setShowChangeBackground] = useState(true);
 
@@ -23,9 +23,7 @@ const HeroSection = () => {
     const handleScroll = () => {
       setShowChangeBackground(window.scrollY < 100);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -34,10 +32,11 @@ const HeroSection = () => {
   useEffect(() => {
     // Fetch the job titles from Sanity
     const fetchTitles = async () => {
-      const query = `*[_type == "hero"]{titles}`;
+      const query = `*[_type == "hero"]{titles, github, linkedin, email, name}`;
       const result = await client.fetch(query);
       if (result.length > 0) {
         setTitles(result[0].titles);
+        setHereData(result[0]);
       }
     };
     fetchTitles();
@@ -92,6 +91,10 @@ const HeroSection = () => {
     changeBackground();
   }, []);
 
+  if (hereData.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section
       id="hero"
@@ -117,7 +120,7 @@ const HeroSection = () => {
         data-aos-delay="100"
       >
         <div id="herotextbox" style={{ justifyContent: "left" }}>
-          <h1>Savan Patel</h1>
+          <h1>{hereData.name}</h1>
           <p>
             I'm
             <span> </span>
@@ -132,7 +135,7 @@ const HeroSection = () => {
           </p>
           <div className="hero-social-links">
             <a
-              href={aboutData.socialLinks.github}
+              href={hereData.github}
               className="github"
               target="_blank"
               rel="noreferrer"
@@ -140,14 +143,14 @@ const HeroSection = () => {
               <i className="bx bxl-github"></i>
             </a>
             <a
-              href={aboutData.socialLinks.linkedIn}
+              href={hereData.linkedin}
               className="linkedin"
               target="_blank"
               rel="noreferrer"
             >
               <i className="bx bxl-linkedin"></i>
             </a>
-            <a href="mailto:savanpatel4724@gmail.com" className="bi-envelope">
+            <a href={`mailto:${hereData.email}`} className="bi-envelope">
               <i className="bx"></i>
             </a>
           </div>

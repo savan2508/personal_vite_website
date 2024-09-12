@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { PortableText } from "@portabletext/react";
 
-// eslint-disable-next-line react/prop-types
 export const ResumeItem = ({ title, date, company, details }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
@@ -30,11 +30,7 @@ export const ResumeItem = ({ title, date, company, details }) => {
         id={`${title.replace(/\s+/g, "").toLowerCase()}`}
       >
         <div className="card card-body">
-          <ul>
-            {details.map((detail, index) => (
-              <li key={index}>{detail}</li>
-            ))}
-          </ul>
+          <PortableText value={details} />
         </div>
       </div>
     </div>
