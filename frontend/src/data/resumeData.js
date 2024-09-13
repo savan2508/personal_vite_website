@@ -1,5 +1,3 @@
-// resumeData.js
-
 const resumeData = {
   title: "Resume",
   content:
