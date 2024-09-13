@@ -27,7 +27,7 @@ export const SkillsSection = () => {
     fetchSkills();
   }, []);
 
-  const handleMouseOver = (index, name) => {
+  const handleMouseOver = (index) => {
     const marble = document.getElementById(`marble-${index}`);
     if (marble) {
       marble.classList.add("hovered");
@@ -45,7 +45,7 @@ export const SkillsSection = () => {
     <section id="skills" className="skills section-bg">
       <div className="container" data-aos="fade-up">
         <div className="section-title">
-          <h2>FACTS</h2>
+          <h2>SKILLS</h2>
           {skillsDescription && (
             <PortableText
               value={skillsDescription}

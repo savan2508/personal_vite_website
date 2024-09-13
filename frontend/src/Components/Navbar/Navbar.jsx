@@ -5,7 +5,6 @@ const Navbar = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
 
   useEffect(() => {
-    // Easy on scroll event listener
     const onscroll = (el, listener) => {
       el.addEventListener("scroll", listener);
     };
