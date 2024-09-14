@@ -18,6 +18,7 @@ function App() {
     const handleLoad = () => {
       setTimeout(() => {
         setLoading(false);
+        window.scrollTo(0, 0);
       }, 1000);
     };
 
