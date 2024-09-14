@@ -5,6 +5,7 @@ import "./HeroSection.style.css";
 import { backgrounds } from "../../data/backgrounds.js";
 import { ReactTyped } from "react-typed";
 import { client } from "../../../client.js";
+import { FaArrowUp, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const HeroSection = () => {
   const [videoSourceLink, setVideoSourceLink] = useState(
@@ -92,7 +93,7 @@ const HeroSection = () => {
   }, []);
 
   if (hereData.length === 0) {
-    return <div>Loading...</div>;
+    return <></>;
   }
 
   return (
@@ -140,7 +141,9 @@ const HeroSection = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <i className="bx bxl-github"></i>
+              <i>
+                <FaGithub />
+              </i>
             </a>
             <a
               href={hereData.linkedin}
@@ -148,10 +151,14 @@ const HeroSection = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <i className="bx bxl-linkedin"></i>
+              <i>
+                <FaLinkedin />
+              </i>
             </a>
-            <a href={`mailto:${hereData.email}`} className="bi-envelope">
-              <i className="bx"></i>
+            <a href={`mailto:${hereData.email}`} className="envelope">
+              <i>
+                <FaEnvelope />
+              </i>
             </a>
           </div>
           <a href="#about" id="home-explore">
@@ -171,7 +178,9 @@ const HeroSection = () => {
             `}
           onClick={scrollToTop}
         >
-          <i className="bi bi-arrow-up-short"></i>
+          <i>
+            <FaArrowUp />
+          </i>
         </div>
       )}
     </section>

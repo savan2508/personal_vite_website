@@ -35,7 +35,7 @@ export const ResumeSection = () => {
       .catch(console.error);
   }, []);
   if (!resumeData) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   const { title, content, summary, education, experience } = resumeData[0];
 

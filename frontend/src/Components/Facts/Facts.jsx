@@ -25,7 +25,7 @@ const FactsSection = () => {
   }, []);
 
   if (!factsData) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   const { title, content, facts } = factsData;
 
