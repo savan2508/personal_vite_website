@@ -31,8 +31,15 @@ export const Certifications = () => {
       .catch(console.error);
   }, []);
 
+  const getPlainTextFromBlocks = (blocks) => {
+    return blocks
+      .map((block) => block.children.map((child) => child.text).join(""))
+      .join(" ");
+  };
+
   const truncateDescription = (description, wordLimit) => {
-    const words = description.split(" ");
+    const plainText = getPlainTextFromBlocks(description);
+    const words = plainText.split(" ");
     if (words.length > wordLimit) {
       return words.slice(0, wordLimit).join(" ") + " ...            ";
     }
@@ -88,25 +95,34 @@ export const Certifications = () => {
             {certifications.map((cert, index) => (
               <SwiperSlide key={index}>
                 <div className="certification-item">
-                  <a href={cert.link} target="_blank" rel="noreferrer">
+                  <a href={cert?.link} target="_blank" rel="noreferrer">
                     <img
-                      src={cert.imageUrl}
+                      src={cert?.imageUrl || ""}
                       className="certification-img"
-                      alt={cert.title}
+                      alt={cert?.title || ""}
                       loading={"lazy"}
                     />
                   </a>
                   <a href={cert.course_link} target="_blank" rel="noreferrer">
-                    <h3>{cert.title}</h3>
+                    <h3>{cert?.title || ""}</h3>
                   </a>
-                  <a href={cert.course_link} target="_blank" rel="noreferrer">
-                    <h4>{cert.organization}</h4>
-                  </a>
+                  {cert?.organization && (
+                    <a
+                      href={cert?.course_link || ""}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <h4>{cert?.organization}</h4>
+                    </a>
+                  )}
                   <p>
-                    {truncateDescription(cert.description, 30)}
-                    {cert.description.split(" ").length > 30 && (
+                    {truncateDescription(cert?.description, 30)}
+                    {getPlainTextFromBlocks(cert?.description).split(" ")
+                      .length > 30 && (
                       <button
-                        onClick={() => openModal(cert.description, cert.title)}
+                        onClick={() =>
+                          openModal(cert?.description, cert?.title)
+                        }
                       >
                         Read More
                       </button>
