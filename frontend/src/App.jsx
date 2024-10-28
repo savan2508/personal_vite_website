@@ -1,17 +1,42 @@
-import HeroSection from "./Components/Hero/HeroSection.jsx";
-import AboutSection from "./container/About/AboutSection.jsx";
-import Facts from "./Components/Facts/Facts.jsx";
-import { ResumeSection } from "./Components/Resume/ResumeSection.jsx";
-import Navbar from "./Components/Navbar/Navbar.jsx";
-import { Work } from "./container/work/Work.jsx";
-import { Footer } from "./container/footer/Footer.jsx";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import "./App.scss";
-import { SkillsSection } from "./container/Skills/SkillSection.jsx";
-import { Certifications } from "./container/Certifications/Certifications.jsx";
-import { useEffect, useState } from "react";
 import { Loader } from "./Components/Loader/Loader.jsx";
+import { ProfileContext } from "./context/ProfileContext.jsx";
+import Work from "./container/work/Work.jsx";
 
+// Lazy-load components
+const HeroSection = React.lazy(
+  () => import("./Components/Hero/HeroSection.jsx"),
+);
+const AboutSection = React.lazy(
+  () => import("./container/About/AboutSection.jsx"),
+);
+const Facts = React.lazy(() => import("./Components/Facts/Facts.jsx"));
+
+// Lazy-load named exports with wrappers
+const ResumeSection = React.lazy(() =>
+  import("./Components/Resume/ResumeSection.jsx").then((module) => ({
+    default: module.ResumeSection,
+  })),
+);
+const Navbar = React.lazy(() => import("./Components/Navbar/Navbar.jsx"));
+const Footer = React.lazy(() =>
+  import("./container/footer/Footer.jsx").then((module) => ({
+    default: module.Footer,
+  })),
+);
+const SkillsSection = React.lazy(() =>
+  import("./container/Skills/SkillSection.jsx").then((module) => ({
+    default: module.SkillsSection,
+  })),
+);
+const Certifications = React.lazy(() =>
+  import("./container/Certifications/Certifications.jsx").then((module) => ({
+    default: module.Certifications,
+  })),
+);
 function App() {
+  const { isLoading } = useContext(ProfileContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,23 +57,25 @@ function App() {
     };
   }, []);
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Loader />;
   }
 
   return (
     <>
       <HeroSection />
-      <main id="main" className="app">
-        <Navbar />
-        <AboutSection />
-        <Facts />
-        <SkillsSection />
-        <ResumeSection />
-        <Work />
-        <Certifications />
-        <Footer />
-      </main>
+      <Suspense fallback={<Loader />}>
+        <main id="main" className="app">
+          <Navbar />
+          <AboutSection />
+          <Facts />
+          <SkillsSection />
+          <ResumeSection />
+          <Work />
+          <Certifications />
+          <Footer />
+        </main>
+      </Suspense>
     </>
   );
 }

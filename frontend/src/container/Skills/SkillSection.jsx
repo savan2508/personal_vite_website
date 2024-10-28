@@ -1,31 +1,23 @@
 import SkillData from "../../data/skillData.js";
-import { useEffect, useState } from "react";
-import { client } from "../../../client.js";
+import { useContext, useEffect, useState } from "react";
 import { SkillIcon } from "./SkillIcon.jsx";
 import { PortableText } from "@portabletext/react";
+import { ProfileContext } from "../../context/ProfileContext.jsx";
 
 export const SkillsSection = () => {
+  const { hero, skillsFetched } = useContext(ProfileContext);
+
   const { skillsLocal } = SkillData;
-  const [skills, setSkills] = useState(skillsLocal);
-  const [skillsDescription, setSkillsDescription] = useState([]);
+  const [skills, setSkills] = useState([skillsLocal]);
 
   useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const skillsQuery = '*[_type == "skills"]';
-        const query2 = '*[_type == "hero"]{skillsDescription}';
-        const fetchedSkillIconData = await client.fetch(skillsQuery);
-        const fetchedFactDescription = await client.fetch(query2);
-        const combinedSkills = [...skillsLocal, ...fetchedSkillIconData];
-        setSkills(combinedSkills);
-        setSkillsDescription(fetchedFactDescription[0].skillsDescription);
-      } catch (error) {
-        console.error("Error fetching skills:", error);
-      }
-    };
-
-    fetchSkills();
+    const combinedSkills = [...skillsLocal, ...skillsFetched];
+    setSkills(combinedSkills);
   }, []);
+
+  if (!skills || skills.length <= 0) {
+    return <></>;
+  }
 
   const handleMouseOver = (index) => {
     const marble = document.getElementById(`marble-${index}`);
@@ -46,9 +38,9 @@ export const SkillsSection = () => {
       <div className="container" data-aos="fade-up">
         <div className="section-title">
           <h2>SKILLS</h2>
-          {skillsDescription && (
+          {hero?.skillsDescription && (
             <PortableText
-              value={skillsDescription}
+              value={hero?.skillsDescription}
               components={{
                 block: {
                   // Customize rendering of "normal" block styles
@@ -64,9 +56,9 @@ export const SkillsSection = () => {
               key={`skill-${index}`}
               id={index}
               {...skill}
-              name={skill.name}
-              icon={skill.icon_url ? skill.icon_url : skill.icon}
-              onMouseOver={() => handleMouseOver(index, skill.name)}
+              name={skill?.name}
+              icon={skill?.icon_url ? skill?.icon_url : skill?.icon}
+              onMouseOver={() => handleMouseOver(index, skill?.name)}
               onMouseOut={handleMouseOut}
             />
           ))}

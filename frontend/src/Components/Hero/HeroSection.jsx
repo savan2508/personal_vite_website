@@ -1,18 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./HeroSection.style.css";
 import { backgrounds } from "../../data/backgrounds.js";
 import { ReactTyped } from "react-typed";
-import { client } from "../../../client.js";
 import { FaArrowUp, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { ProfileContext } from "../../context/ProfileContext.jsx";
 
 const HeroSection = () => {
+  const { hero } = useContext(ProfileContext);
+
+  if (!hero) {
+    return null;
+  }
+
   const [videoSourceLink, setVideoSourceLink] = useState(
     "./assets/video/video2.mp4",
   );
-  const [titles, setTitles] = useState([" Software Engineer"]);
-  const [hereData, setHereData] = useState([]);
+
   const [hereSectionStyle, setHeroSectionStyle] = useState({});
   const [showChangeBackground, setShowChangeBackground] = useState(true);
 
@@ -28,19 +33,6 @@ const HeroSection = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  useEffect(() => {
-    // Fetch the job titles from Sanity
-    const fetchTitles = async () => {
-      const query = `*[_type == "hero"]{titles, github, linkedin, email, name}`;
-      const result = await client.fetch(query);
-      if (result.length > 0) {
-        setTitles(result[0].titles);
-        setHereData(result[0]);
-      }
-    };
-    fetchTitles();
   }, []);
 
   const scrollToTop = () => {
@@ -92,10 +84,6 @@ const HeroSection = () => {
     changeBackground();
   }, []);
 
-  if (hereData.length === 0) {
-    return <></>;
-  }
-
   return (
     <section
       id="hero"
@@ -121,12 +109,12 @@ const HeroSection = () => {
         data-aos-delay="100"
       >
         <div id="herotextbox" style={{ justifyContent: "left" }}>
-          <h1>{hereData.name}</h1>
+          <h1>{hero.name}</h1>
           <p>
             I'm
             <span> </span>
             <ReactTyped
-              strings={titles}
+              strings={hero.titles}
               typeSpeed={100}
               backSpeed={50}
               backDelay={2000}
@@ -136,7 +124,7 @@ const HeroSection = () => {
           </p>
           <div className="hero-social-links">
             <a
-              href={hereData.github}
+              href={hero.github}
               className="github"
               target="_blank"
               rel="noreferrer"
@@ -146,7 +134,7 @@ const HeroSection = () => {
               </i>
             </a>
             <a
-              href={hereData.linkedin}
+              href={hero.linkedin}
               className="linkedin"
               target="_blank"
               rel="noreferrer"
@@ -155,7 +143,7 @@ const HeroSection = () => {
                 <FaLinkedin />
               </i>
             </a>
-            <a href={`mailto:${hereData.email}`} className="envelope">
+            <a href={`mailto:${hero.email}`} className="envelope">
               <i>
                 <FaEnvelope />
               </i>
