@@ -39,6 +39,7 @@ export const ResumeSection = () => {
                 title={edu.title}
                 date={null}
                 company={edu.institution}
+                gpa={edu.gpa}
                 details={[]}
               />
             ))}
@@ -51,6 +52,7 @@ export const ResumeSection = () => {
                 title={exp.title}
                 date={exp.date}
                 company={exp.company}
+                gpa={null}
                 details={exp.details}
               />
             ))}

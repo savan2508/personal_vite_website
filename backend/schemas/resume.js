@@ -36,6 +36,7 @@ export default {
           fields: [
             {name: 'title', type: 'string', title: 'Degree Title'},
             {name: 'institution', type: 'string', title: 'Institution'},
+            {name: 'gpa', type: 'string', title: 'GPA'},
             {name: 'location', type: 'string', title: 'Location'},
             {name: 'date', type: 'string', title: 'Date'},
           ],

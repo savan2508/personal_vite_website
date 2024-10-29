@@ -3,16 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import { SkillIcon } from "./SkillIcon.jsx";
 import { PortableText } from "@portabletext/react";
 import { ProfileContext } from "../../context/ProfileContext.jsx";
+import { SkillsBreakdown } from "./SkillsBreakdown.jsx";
 
 export const SkillsSection = () => {
   const { hero, skillsFetched } = useContext(ProfileContext);
+
+  const { skillsIcons, skillsSections } = skillsFetched[0];
 
   const { skillsLocal } = SkillData;
   const [skills, setSkills] = useState([skillsLocal]);
 
   useEffect(() => {
-    const combinedSkills = [...skillsLocal, ...skillsFetched];
-    setSkills(combinedSkills);
+    const combinedSkillsIcons = [...skillsLocal, ...skillsIcons];
+    setSkills(combinedSkillsIcons);
   }, []);
 
   if (!skills || skills.length <= 0) {
@@ -50,6 +53,7 @@ export const SkillsSection = () => {
             />
           )}
         </div>
+        <SkillsBreakdown skillsCategories={skillsSections} />
         <div className="skills-content">
           {skills.map((skill, index) => (
             <SkillIcon

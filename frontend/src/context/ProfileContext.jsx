@@ -30,7 +30,13 @@ export const ProfileContextProvider = ({ children }) => {
         "screenshots": screenshots[].asset->url,
       },
       "certifications": *[_type == "certification"]{..., "imageUrl": image.asset->url},
-      "skills": *[_type == "skills"]{..., "icon": icon.asset->url},
+      "skills": *[_type == "skills"]{
+        ..., 
+        "skillsIcons": skillsIcons[]{
+          ..., 
+          "icon": icon.asset->url
+        }
+      },
       "facts": *[_type == "factsSection"]{..., facts[]{
           title,
           description,
