@@ -43,7 +43,7 @@ function App() {
     const handleLoad = () => {
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 100);
     };
 
     window.addEventListener("load", handleLoad);
@@ -63,7 +63,9 @@ function App() {
 
   return (
     <>
-      <HeroSection />
+      <Suspense fallback={<Loader />}>
+        <HeroSection />
+      </Suspense>
       <Suspense fallback={<Loader />}>
         <main id="main" className="app">
           <Navbar />

@@ -14,11 +14,17 @@ const HeroSection = () => {
     return null;
   }
 
-  const [videoSourceLink, setVideoSourceLink] = useState(
-    "./assets/video/video2.mp4",
-  );
+  const [videoSourceLink, setVideoSourceLink] = useState("");
+  const initialImageUrl = "./assets/img/background_image/img6.jpg";
 
-  const [hereSectionStyle, setHeroSectionStyle] = useState({});
+  const [hereSectionStyle, setHeroSectionStyle] = useState({
+    backgroundImage: `url(${initialImageUrl})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    position: "relative",
+    width: "100%",
+    height: "100vh",
+  });
   const [showChangeBackground, setShowChangeBackground] = useState(true);
 
   const videoRef = useRef(null);
@@ -46,13 +52,19 @@ const HeroSection = () => {
     const randomBackground =
       backgrounds[Math.floor(Math.random() * backgrounds.length)];
     const transitionStyle = {
-      transition: "background 1s ease-in, background-image 1s ease-in",
+      transition:
+        "background 1s ease-in, background-image 1s ease-in, color 1s ease-in, opacity 1s ease-in",
     };
 
     if (randomBackground.type === "video") {
       setHeroSectionStyle({
         ...transitionStyle,
         background: "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        position: "relative",
+        width: "100%",
+        height: "100vh",
       });
       setVideoSourceLink(randomBackground.source);
     } else if (randomBackground.type === "image") {
@@ -70,7 +82,7 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && videoSourceLink !== "") {
       videoRef.current.load();
       videoRef.current.play().catch((error) => {
         if (error.name !== "AbortError") {
@@ -80,9 +92,9 @@ const HeroSection = () => {
     }
   }, [videoSourceLink]);
 
-  useEffect(() => {
-    changeBackground();
-  }, []);
+  // useEffect(() => {
+  //   changeBackground();
+  // }, []);
 
   return (
     <section
@@ -90,18 +102,30 @@ const HeroSection = () => {
       className="d-flex flex-column justify-content-center"
       style={hereSectionStyle}
     >
-      <video
-        id="hero-background-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        ref={videoRef}
-      >
-        <source id="video-source" src={videoSourceLink} type="video/mp4" />
-        {/* Fallback content for non-supported browsers */}
-        Your browser does not support the video tag.
-      </video>
+      {videoSourceLink && (
+        <video
+          id="hero-background-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          ref={videoRef}
+          key={videoSourceLink} // Adding key helps React re-instance the video tag if src changes
+          style={{
+            // Ensure video is behind content and covers area
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            left: "0",
+            top: "0",
+            objectFit: "cover",
+            zIndex: 0, // Ensure it's behind the content which should have a higher z-index
+          }}
+        >
+          <source id="video-source" src={videoSourceLink} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       <div
         className="container"
         id="hometext"
