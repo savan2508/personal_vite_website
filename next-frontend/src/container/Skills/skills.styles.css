@@ -1,0 +1,110 @@
+.skills {
+    padding: 60px 0;
+}
+
+.skills-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skill-wrapper {
+    text-align: center;
+    margin: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+@media (max-width: 1200px) {
+    .skills-content {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.skill {
+    text-align: center;
+    margin: 20px;
+    transition: transform 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hovered-skill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 5px 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: absolute; /* Position the capsule on top of the marble */
+    z-index: 10; /* Make sure it appears above the other marbles */
+    top: 0;
+    left: 0;
+    /*transform: translate(-10px, -10px); !* Slight offset for better appearance *!*/
+}
+
+.hovered-skill img.marble-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.skill-name {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #0563bb;
+    padding: 5px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.marble-icon {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.marble-icon-hovered {
+    width: 60px;
+    height: 60px;
+}
+
+.hover-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.expand-left {
+    left: auto; /* Remove the default left alignment */
+    right: 0; /* Make it expand to the left */
+    /*transform: translateX(-10px); !* Adjust gap from the marble *!*/
+}

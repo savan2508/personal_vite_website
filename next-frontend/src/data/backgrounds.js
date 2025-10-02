@@ -1,0 +1,18 @@
+export const backgrounds = [
+  { type: "video", source: "./assets/video/video1.mp4" },
+  { type: "video", source: "./assets/video/video2.mp4" },
+  { type: "video", source: "./assets/video/video3.mp4" },
+  { type: "video", source: "./assets/video/video4.mp4" },
+  { type: "video", source: "./assets/video/video5.mp4" },
+  { type: "video", source: "./assets/video/video6.mp4" },
+  { type: "video", source: "./assets/video/video7.mp4" },
+  { type: "video", source: "./assets/video/video8.mp4" },
+  { type: "video", source: "./assets/video/video9.mp4" },
+  { type: "video", source: "./assets/video/video10.mp4" },
+  { type: "image", source: "./assets/img/background_image/img1.jpg" },
+  { type: "image", source: "./assets/img/background_image/img2.jpg" },
+  { type: "image", source: "./assets/img/background_image/img3.jpg" },
+  { type: "image", source: "./assets/img/background_image/img4.jpg" },
+  { type: "image", source: "./assets/img/background_image/img5.jpg" },
+  { type: "image", source: "./assets/img/background_image/img6.jpg" },
+];
