@@ -47,6 +47,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <title>Savan&#39;s Website</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+        />
+      </head>
       {/* Add Bootstrap CSS to the head */}
       <body
         className={`${josefin_sans.variable} ${dm_sans.variable} antialiased`}
@@ -57,20 +64,6 @@ export default async function RootLayout({
           <Analytics />
           <SpeedInsights />
         </ProfileContextProvider>
-
-        {/* Add Bootstrap and Analytics scripts before the closing body tag */}
-        <Script
-          async
-          defer
-          src="https://scripts.simpleanalyticscdn.com/latest.js"
-        />
-        <noscript>
-          <img
-            alt=""
-            referrerPolicy="no-referrer-when-downgrade"
-            src="https://queue.simpleanalyticscdn.com/noscript.gif"
-          />
-        </noscript>
       </body>
     </html>
   );

@@ -2,19 +2,17 @@
 
 import "./work.scss";
 import { motion } from "framer-motion";
-import { lazy, Suspense, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { WorkCard } from "./WorkCard.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import Button from "react-bootstrap/Button";
 import { ProfileContext } from "@/context/ProfileContext";
-import { Loader } from "@/Components/Loader/Loader";
+import { GridModal } from "@/Components/Modal/GridModal";
 
-const GridModal = lazy(() =>
-  import("../../Components/Modal/GridModal.jsx").then((module) => ({
-    default: module.GridModal,
-  })),
-);
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export const Work = () => {
   const { works } = useContext(ProfileContext);
@@ -141,15 +139,13 @@ export const Work = () => {
           </Button>
         </div>
         {showAllModal && (
-          <Suspense fallback={<Loader />}>
-            <GridModal
-              gridData={filterWork}
-              activeFilter={activeFilter}
-              handleCloseAllModal={handleCloseAllModal}
-              showAllModal={showAllModal}
-              key={`grid_modal`}
-            />
-          </Suspense>
+          <GridModal
+            gridData={filterWork}
+            activeFilter={activeFilter}
+            handleCloseAllModal={handleCloseAllModal}
+            showAllModal={showAllModal}
+            key={`grid_modal`}
+          />
         )}
       </section>
     </>
