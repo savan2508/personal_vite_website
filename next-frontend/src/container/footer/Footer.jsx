@@ -7,25 +7,18 @@ import {
   AiOutlineMail,
   AiFillPhone,
 } from "react-icons/ai";
-import { useEffect, useState } from "react";
-import { client } from "../../../client.js";
+import { useContext, useEffect, useState } from "react";
+import { ProfileContext } from "@/context/ProfileContext";
 
 export const Footer = () => {
-  const [footerData, setFooterData] = useState(null);
-  useEffect(() => {
-    // Fetch the job titles from Sanity
-    const fetchTitles = async () => {
-      const query = `*[_type == "hero"]{github, linkedin, email, name, cellPhone}`;
-      const result = await client.fetch(query);
-      if (result.length > 0) {
-        setFooterData(result[0]);
-      }
-    };
-    fetchTitles();
-  }, []);
+  const { footer } = useContext(ProfileContext);
+
+  const footerData = footer[0];
+
   if (!footerData) {
     return <div>Loading...</div>;
   }
+
   return (
     <>
       <section id="contact" className="contact">
