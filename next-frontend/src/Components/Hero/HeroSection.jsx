@@ -20,8 +20,6 @@ const HeroSection = () => {
     return null;
   }
 
-  console.log(heroData);
-
   const { currentBackground, changeBackground } = useRandomBackground();
   const [showChangeBackground, setShowChangeBackground] = useState(true);
 
