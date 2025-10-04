@@ -1,16 +1,27 @@
 import "./work.scss";
 import { motion } from "framer-motion";
-import { client } from "../../../client.js";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { WorkCard } from "./WorkCard.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import Button from "react-bootstrap/Button";
-import { GridModal } from "../../Components/Modal/GridModal.jsx";
+import { ProfileContext } from "../../context/ProfileContext.jsx";
+import { Loader } from "../../Components/Loader/Loader.jsx";
 
-export const Work = () => {
-  const [works, setWorks] = useState([]);
-  const [filterWork, setFilterWork] = useState([]);
+const GridModal = lazy(() =>
+  import("../../Components/Modal/GridModal.jsx").then((module) => ({
+    default: module.GridModal,
+  })),
+);
+
+const Work = () => {
+  const { works } = useContext(ProfileContext);
+
+  if (!works || works.length <= 1) {
+    return <></>;
+  }
+
+  const [filterWork, setFilterWork] = useState(works);
   const [activeFilter, setActiveFilter] = useState("All");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
@@ -19,9 +30,6 @@ export const Work = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const [showAllModal, setShowAllModal] = useState(false);
-
-  const handleShowAllModal = () => setShowAllModal(true);
-  const handleCloseAllModal = () => setShowAllModal(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,33 +42,13 @@ export const Work = () => {
   }, []);
 
   useEffect(() => {
-    client.fetch(`*[_type == "works"]{ tags }`).then((data) => {
-      const allTags = data.flatMap((work) => work.tags);
-      const uniqueTags = Array.from(new Set(allTags));
-      setTags([...uniqueTags, "All"]);
-    });
+    const allTags = works.flatMap((work) => work.tags);
+    const uniqueTags = Array.from(new Set(allTags));
+    setTags([...uniqueTags, "All"]);
   }, []);
 
-  useEffect(() => {
-    const query = `*[_type == "works"] | order(priority desc, title asc) {
-  title,
-  priority,
-  shortDescription,
-  description[],
-  "mainImage": imgUrl.asset->url,
-  "screenshots": screenshots[].asset->url,
-  projectLink,
-  codeLink,
-  downloadLink,
-  tags,
-  publishedAt
-}`;
-
-    client.fetch(query).then((data) => {
-      setWorks(data);
-      setFilterWork(data);
-    });
-  }, []);
+  const handleShowAllModal = () => setShowAllModal(true);
+  const handleCloseAllModal = () => setShowAllModal(false);
 
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
@@ -146,15 +134,19 @@ export const Work = () => {
           </Button>
         </div>
         {showAllModal && (
-          <GridModal
-            gridData={filterWork}
-            activeFilter={activeFilter}
-            handleCloseAllModal={handleCloseAllModal}
-            showAllModal={showAllModal}
-            key={`grid_modal`}
-          />
+          <Suspense fallback={<Loader />}>
+            <GridModal
+              gridData={filterWork}
+              activeFilter={activeFilter}
+              handleCloseAllModal={handleCloseAllModal}
+              showAllModal={showAllModal}
+              key={`grid_modal`}
+            />
+          </Suspense>
         )}
       </section>
     </>
   );
 };
+
+export default Work;

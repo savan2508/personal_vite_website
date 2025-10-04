@@ -1,43 +1,16 @@
 import { ResumeItem } from "./ResumeItem.jsx";
-import { client } from "../../../client.js";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { PortableText } from "@portabletext/react";
+import { ProfileContext } from "../../context/ProfileContext.jsx";
 
 export const ResumeSection = () => {
-  const [resumeData, setResumeData] = useState(null); // State to store resume data
+  const { resume } = useContext(ProfileContext);
 
-  useEffect(() => {
-    const query = `*[_type == "resume"]{
-      title,
-      content,
-      summary {
-        name,
-        description,
-        location,
-        phone,
-        email
-      },
-      education[] {
-        title,
-        institution,
-        date
-      },
-      experience[] {
-        title,
-        company,
-        date,
-        details
-      }
-    }`;
-    client
-      .fetch(query)
-      .then((data) => setResumeData(data))
-      .catch(console.error);
-  }, []);
-  if (!resumeData) {
-    return <div>Loading...</div>;
+  if (!resume) {
+    return <></>;
   }
-  const { title, content, summary, education, experience } = resumeData[0];
+
+  const { title, content, summary, education, experience } = resume;
 
   return (
     <section id="resume" className="resume">
@@ -66,6 +39,7 @@ export const ResumeSection = () => {
                 title={edu.title}
                 date={null}
                 company={edu.institution}
+                gpa={edu.gpa}
                 details={[]}
               />
             ))}
@@ -78,6 +52,7 @@ export const ResumeSection = () => {
                 title={exp.title}
                 date={exp.date}
                 company={exp.company}
+                gpa={null}
                 details={exp.details}
               />
             ))}

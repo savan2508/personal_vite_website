@@ -18,7 +18,7 @@ export const Footer = () => {
     fetchTitles();
   }, []);
   if (!footerData) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   return (
     <>

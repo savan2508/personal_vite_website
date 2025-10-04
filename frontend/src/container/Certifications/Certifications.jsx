@@ -1,35 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./certifications.scss";
-import { client } from "../../../client.js";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { CustomModal } from "../../Components/Modal/CustomModal.jsx";
+import { ProfileContext } from "../../context/ProfileContext.jsx";
 
 export const Certifications = () => {
-  const [certifications, setCertifications] = useState([]);
+  const { certifications } = useContext(ProfileContext);
+
+  if (!certifications || certifications.length <= 0) {
+    return <></>;
+  }
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDescription, setSelectedDescription] = useState("");
   const [selectedCertification, setSelectedCertification] = useState("");
   const [swiperInstance, setSwiperInstance] = useState(null);
-
-  useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "certification"]{
-          title,
-          organization,
-          description,
-          link,
-          course_link,
-          "imageUrl": image.asset->url
-        }`,
-      )
-      .then((data) => setCertifications(data))
-      .catch(console.error);
-  }, []);
 
   const getPlainTextFromBlocks = (blocks) => {
     return blocks

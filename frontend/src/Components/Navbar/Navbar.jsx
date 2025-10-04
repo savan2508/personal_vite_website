@@ -1,8 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./navbar.styles.css";
+import {
+  BiHome,
+  BiUser,
+  BiFileBlank,
+  BiBookContent,
+  BiEnvelope,
+  BiX,
+  BiMenu,
+} from "react-icons/bi";
 
 const Navbar = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    // Function to detect clicks outside the navbar
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMobileMenuVisible(false);
+        document.body.classList.remove("mobile-nav-active");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navRef]);
 
   useEffect(() => {
     const onscroll = (el, listener) => {
@@ -59,58 +86,71 @@ const Navbar = () => {
       let body = document.querySelector("body");
       if (body.classList.contains("mobile-nav-active")) {
         body.classList.remove("mobile-nav-active");
-        let navbarToggle = document.querySelector(".mobile-nav-toggle");
-        navbarToggle.classList.toggle("bi-list");
-        navbarToggle.classList.toggle("bi-x");
       }
       scrollto(e.target.hash);
+      setMobileMenuVisible(false);
     }
   };
 
   return (
-    <header className="d-flex flex-column justify-content-center" id="header">
-      <i
-        className={`bi mobile-nav-toggle d-lg-none ${
-          mobileMenuVisible ? "bi-x" : "bi-list"
-        }`}
-        onClick={toggleMobileMenu}
-      ></i>
-      <nav
-        className={`navbar nav-menu ${
-          mobileMenuVisible ? "mobile-menu-visible" : ""
-        }`}
-        id="navbar"
-        onClick={handleNavItemClick}
-      >
-        <ul>
-          <li>
-            <a className="nav-link scrollto active" href="#hero">
-              <i className="bx bx-home"></i> <span>Home</span>
-            </a>
-          </li>
-          <li>
-            <a className="nav-link scrollto" href="#about">
-              <i className="bx bx-user"></i> <span>About</span>
-            </a>
-          </li>
-          <li>
-            <a className="nav-link scrollto" href="#resume">
-              <i className="bx bx-file-blank"></i> <span>Resume</span>
-            </a>
-          </li>
-          <li>
-            <a className="nav-link scrollto" href="#portfolio">
-              <i className="bx bx-book-content"></i> <span>Portfolio</span>
-            </a>
-          </li>
-          <li>
-            <a className="nav-link scrollto" href="#contact">
-              <i className="bx bx-envelope"></i> <span>Contact</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <>
+      <i className={`mobile-nav-toggle d-lg-none`} onClick={toggleMobileMenu}>
+        {mobileMenuVisible ? <BiX /> : <BiMenu />}
+      </i>
+      <header className="d-flex flex-column justify-content-center" id="header">
+        <nav
+          className={`nav-menu ${
+            mobileMenuVisible ? "mobile-menu-visible" : ""
+          }`}
+          id="navbar"
+          onClick={handleNavItemClick}
+          ref={navRef}
+        >
+          <ul>
+            <li>
+              <a className="nav-link scrollto active" href="#hero">
+                <i>
+                  <BiHome />
+                </i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li>
+              <a className="nav-link scrollto" href="#about">
+                <i>
+                  <BiUser />
+                </i>{" "}
+                <span>About</span>
+              </a>
+            </li>
+            <li>
+              <a className="nav-link scrollto" href="#resume">
+                <i>
+                  <BiFileBlank />
+                </i>{" "}
+                <span>Resume</span>
+              </a>
+            </li>
+            <li>
+              <a className="nav-link scrollto" href="#portfolio">
+                <i>
+                  <BiBookContent />
+                </i>{" "}
+                <span>Portfolio</span>
+              </a>
+            </li>
+            <li>
+              <a className="nav-link scrollto" href="#contact">
+                <i>
+                  <BiEnvelope />
+                </i>{" "}
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </>
   );
 };
 

@@ -1,31 +1,13 @@
 import "./facts.styles.css";
-import { useEffect, useState } from "react";
-import { client } from "../../../client.js";
+import { useContext } from "react";
 import { PortableText } from "@portabletext/react";
+import { ProfileContext } from "../../context/ProfileContext.jsx";
 
 const FactsSection = () => {
-  const [factsData, setFactsData] = useState(null);
-
-  useEffect(() => {
-    const fetchFactsData = async () => {
-      const query = `*[_type == "factsSection"]{
-        title,
-        content,
-        facts[]{
-          title,
-          description,
-          "iconUrl": icon.asset->url,
-          link
-        }
-      }`;
-      const data = await client.fetch(query);
-      setFactsData(data[0]); // Assuming only one document is returned
-    };
-    fetchFactsData();
-  }, []);
+  const { factsData } = useContext(ProfileContext);
 
   if (!factsData) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   const { title, content, facts } = factsData;
 
