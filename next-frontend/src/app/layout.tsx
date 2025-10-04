@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Josefin_Sans, DM_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Import your global styles here. Next.js handles the bundling.
 import "../styles/index.css";
@@ -52,6 +54,8 @@ export default async function RootLayout({
         <ProfileContextProvider initialData={profileData}>
           <Navbar />
           {children}
+          <Analytics />
+          <SpeedInsights />
         </ProfileContextProvider>
 
         {/* Add Bootstrap and Analytics scripts before the closing body tag */}
