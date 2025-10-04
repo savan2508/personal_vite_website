@@ -1,3 +1,5 @@
+"use client";
+
 import SkillData from "../../data/skillData.js";
 import { useContext, useEffect, useState } from "react";
 import { SkillIcon } from "./SkillIcon.jsx";
