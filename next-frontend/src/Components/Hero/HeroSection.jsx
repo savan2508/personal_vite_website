@@ -123,7 +123,7 @@ const HeroSection = () => {
             src={currentBackground.source}
             alt="Hero background"
             fill
-            objectFit="cover" // This will maintain aspect ratio and prevent distortion
+            objectFit="cover" // This will maintain an aspect ratio and prevent distortion
             priority // Preload the image since it's in the hero section
           />
         )}
