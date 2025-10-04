@@ -12,6 +12,15 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    outputFileTracingExcludes: {
+      "*": [
+        "./node_modules/@next/swc-linux-x64-gnu",
+        "./node_modules/@next/swc-linux-x64-musl",
+        "./node_modules/@esbuild/linux-x64",
+      ],
+    },
+  },
 };
 
-export default withNextVideo(nextConfig);
+export default withNextVideo(nextConfig, { folder: "public/video" });
