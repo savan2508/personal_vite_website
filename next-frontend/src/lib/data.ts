@@ -1,33 +1,34 @@
 import { client } from "../../client";
 
 /**
- * Fetches data for the Hero and Skills sections from Sanity.
+ * Fetches all data required for the ProfileContext in a single, efficient query.
  */
-export async function getHeroData() {
-  const heroQuery = `*[_type == "hero"]{titles, github, linkedin, email, name, skillsDescription}[0]`;
-  const skillsQuery = '*[_type == "skills"]';
+export async function getProfileData() {
+  const query = `{
+      "hero": *[_type == "hero"]{...},
+      "abouts": *[_type == "abouts"]{...},
+      "resume": *[_type == "resume"]{...},
+      "works": *[_type == "works"] | order(priority desc, title asc) 
+      {
+        ..., 
+        "mainImage": imgUrl.asset->url,
+        "screenshots": screenshots[].asset->url,
+      },
+      "certifications": *[_type == "certification"]{..., "imageUrl": image.asset->url},
+      "skills": *[_type == "skills"]{
+        ..., 
+        "skillsIcons": skillsIcons[]{
+          ..., 
+          "icon": icon.asset->url
+        }
+      },
+      "facts": *[_type == "factsSection"]{..., facts[]{
+          title,
+          description,
+          "iconUrl": icon.asset->url,
+          link
+        }},
+    }`;
 
-  // Fetch all data in parallel
-  const [heroData, fetchedSkills] = await Promise.all([
-    client.fetch(heroQuery),
-    client.fetch(skillsQuery),
-  ]);
-
-  return { heroData };
-}
-
-/**
- * Fetches data for the Certifications section from Sanity.
- */
-export async function getCertificationsData() {
-  const certsQuery = `*[_type == "certification"]{
-     title,
-     organization,
-     description,
-     link,
-     course_link,
-     "imageUrl": image.asset->url
-   }`;
-  const certifications = await client.fetch(certsQuery);
-  return { certifications };
+  return await client.fetch(query);
 }

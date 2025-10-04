@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import Image from "next/image";
 import "./custom-carousel.scss";
 import { createPortal } from "react-dom";
 
@@ -24,11 +25,13 @@ export const CustomCarousel = ({ isOpen, images, onClose }) => {
             {images?.length > 0 &&
               images.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <img
+                  <Image
                     src={image}
                     alt={`Slide ${index}`}
-                    loading={"lazy"}
                     className="carousel-image"
+                    fill
+                    sizes="100vw"
+                    style={{ objectFit: "contain" }}
                   />
                 </SwiperSlide>
               ))}

@@ -3,33 +3,26 @@
 import "./aboutsection.styles.css";
 import "./About.scss";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { urlFor, client } from "../../../client.js";
+import { useContext } from "react";
+import { urlFor } from "../../../client.js";
 import { PortableText } from "@portabletext/react";
+import { ProfileContext } from "@/context/ProfileContext";
 
 const AboutSection = () => {
-  const [abouts, setAbouts] = useState([]);
-  const [aboutDescription, setAboutDescription] = useState([]);
+  const { hero, abouts } = useContext(ProfileContext);
 
-  useEffect(() => {
-    const query1 = '*[_type == "abouts"]';
-    const query2 = '*[_type == "hero"]{aboutDescription}';
-    client.fetch(query1).then((res) => {
-      setAbouts(res);
-    });
-    client.fetch(query2).then((res) => {
-      setAboutDescription(res[0].aboutDescription);
-    });
-  }, []);
+  if (!abouts || abouts.length <= 0) {
+    return <></>;
+  }
 
   return (
     <section id="about" className="about" data-aos="fade-up">
       <div className="container">
         <div className="section-title">
           <h2>ABOUT</h2>
-          {aboutDescription && (
+          {hero.aboutDescription && (
             <PortableText
-              value={aboutDescription}
+              value={hero.aboutDescription}
               components={{
                 block: {
                   // Customize rendering of "normal" block styles

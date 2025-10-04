@@ -3,13 +3,18 @@ import { motion } from "framer-motion";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
 import { FaDownload } from "react-icons/fa";
 import { useState } from "react";
-import { CustomModal } from "../../Components/Modal/CustomModal.jsx";
-import { CustomCarousel } from "../../Components/Carousel/CustomCarousel.jsx";
+import { CustomModal } from "@/Components/Modal/CustomModal";
+import { CustomCarousel } from "@/Components/Carousel/CustomCarousel";
+import Image from "next/image";
 
 // eslint-disable-next-line react/prop-types
 export const WorkCard = ({ work }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
+
+  // Generate full image URLs from Sanity image assets for the screenshots
+  const screenshotUrls =
+    work.screenshots?.map((screenshot) => urlFor(screenshot).url()) || [];
 
   const handleCardClick = () => {
     setModalIsOpen(true);
@@ -64,7 +69,13 @@ export const WorkCard = ({ work }) => {
     <>
       <div onClick={handleCardClick} key={`work-card-${work.title}`}>
         <div className="app__work-img app__flex">
-          <img src={urlFor(work.mainImage)} alt={work.name} loading="lazy" />
+          <Image
+            src={urlFor(work.mainImage).url()}
+            alt={work.title || "Project Image"}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+          />
           <motion.div
             whileHover={{ opacity: [0, 1] }}
             transition={{
@@ -136,7 +147,7 @@ export const WorkCard = ({ work }) => {
           modalIsOpen={modalIsOpen}
           closeModal={closeModal}
           description={work.description}
-          screenshots={work.screenshots}
+          screenshots={screenshotUrls}
           title={work.title}
           buttons={buttons}
         />
@@ -145,7 +156,7 @@ export const WorkCard = ({ work }) => {
       {isCarouselOpen && (
         <CustomCarousel
           isOpen={isCarouselOpen}
-          images={work.screenshots}
+          images={screenshotUrls}
           onClose={handleCloseCarousel}
         />
       )}

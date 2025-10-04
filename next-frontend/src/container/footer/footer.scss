@@ -36,6 +36,13 @@
       margin: 0 0.7rem;
     }
 
+    svg {
+      font-size: 1.75rem;
+      margin-right: 1rem;
+      color: var(--secondary-color);
+      transition: all 0.3s ease-in-out;
+    }
+
     p {
       font-weight: 500;
     }

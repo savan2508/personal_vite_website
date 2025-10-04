@@ -39,8 +39,7 @@
 
     .certification-img {
       width: 70%;
-      border: 4px solid #fff;
-      margin: 0 auto;
+      object-fit: contain;
     }
 
     h3 {
@@ -105,4 +104,14 @@
   .swiper-slide {
     max-width: 100%;
   }
+}
+
+.certification-img-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto 15px;
+  border: 4px solid #fff;
 }

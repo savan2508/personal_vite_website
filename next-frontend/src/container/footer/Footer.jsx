@@ -1,8 +1,12 @@
 "use client";
 
 import "./footer.scss";
-import { images } from "../../constants/index.js";
-import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineMail,
+  AiFillPhone,
+} from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { client } from "../../../client.js";
 
@@ -28,13 +32,13 @@ export const Footer = () => {
         <h2 className="head-text">Contact Me</h2>
         <div className="app__footer-cards">
           <div className="app__footer-card ">
-            <img src={images.email} alt="email" />
+            <AiOutlineMail />
             <a href={`mailto:${footerData.email}`} className="p-text">
               {footerData.email}
             </a>
           </div>
           <div className="app__footer-card">
-            <img src={images.mobile} alt="phone" />
+            <AiFillPhone />
             <a href={`tel:${footerData.cellPhone}`} className="p-text">
               {footerData.cellPhone}
             </a>

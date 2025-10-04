@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import "./custom-modal.scss";
+import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 
 export const CustomModal = ({
@@ -39,11 +40,13 @@ export const CustomModal = ({
                   key={index}
                   className="carousel-image-container-modal"
                 >
-                  <img
+                  <Image
                     className="d-block w-100 carousel-image-modal"
                     src={screenshot}
-                    loading="lazy"
                     alt={`Screenshot ${index + 1}`}
+                    width={1600} // Example width for 16:9 aspect ratio
+                    height={900} // Example height for 16:9 aspect ratio
+                    sizes="90vw"
                   />
                 </Carousel.Item>
               ))}

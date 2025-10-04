@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Josefin_Sans, Poppins, Aladin, DM_Sans } from "next/font/google";
+import { Josefin_Sans, DM_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -7,9 +7,15 @@ import "./globals.css";
 import "../styles/index.css";
 import "../styles/style.css";
 import "../styles/App.scss";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // Import your components
 import Navbar from "@/Components/Navbar/Navbar";
+import { ProfileContextProvider } from "@/context/ProfileContext";
+import { getProfileData } from "@/lib/data";
+import React from "react";
 
 // Setup the fonts you were using from Google Fonts
 const josefin_sans = Josefin_Sans({
@@ -29,32 +35,26 @@ export const metadata: Metadata = {
   description: "Savan Patel's personal portfolio website.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch all data on the server, once.
+  const profileData = await getProfileData();
+
   return (
     <html lang="en">
       {/* Add Bootstrap CSS to the head */}
-      <head>
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-        />
-      </head>
       <body
         className={`${josefin_sans.variable} ${dm_sans.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <ProfileContextProvider initialData={profileData}>
+          <Navbar />
+          {children}
+        </ProfileContextProvider>
 
         {/* Add Bootstrap and Analytics scripts before the closing body tag */}
-        <Script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-          crossOrigin="anonymous"
-        />
         <Script
           async
           defer

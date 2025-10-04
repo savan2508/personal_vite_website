@@ -1,20 +1,26 @@
 "use client"; // Keep this as a client component for now because of the background changer
 
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./HeroSection.style.css";
-import { backgrounds } from "@/data/backgrounds";
 import { ReactTyped } from "react-typed";
+import Image from "next/image";
+import Video from "next-video";
+import { useRandomBackground } from "@/hooks/useRandomBackground";
+import { ProfileContext } from "@/context/ProfileContext";
 
-const HeroSection = ({ heroData }) => {
-  const [videoSourceLink, setVideoSourceLink] = useState(
-    "./assets/video/video2.mp4",
-  );
-  const [heroSectionStyle, setHeroSectionStyle] = useState({});
+const HeroSection = () => {
+  const { hero: heroData } = useContext(ProfileContext);
+
+  if (!heroData) {
+    return null;
+  }
+  const { currentBackground, changeBackground } = useRandomBackground();
   const [showChangeBackground, setShowChangeBackground] = useState(true);
 
-  const videoRef = useRef(null);
+  const isVideo = currentBackground?.type === "video";
+  const isImage = currentBackground?.type === "image";
 
   useEffect(() => {
     // Initialize AOS on the client
@@ -36,73 +42,45 @@ const HeroSection = ({ heroData }) => {
     });
   };
 
-  const changeBackground = () => {
-    const randomBackground =
-      backgrounds[Math.floor(Math.random() * backgrounds.length)];
-    const transitionStyle = {
-      transition: "background 1s ease-in, background-image 1s ease-in",
-    };
-
-    if (randomBackground.type === "video") {
-      setHeroSectionStyle({
-        ...transitionStyle,
-        background: "none",
-      });
-      setVideoSourceLink(randomBackground.source);
-    } else if (randomBackground.type === "image") {
-      // Handle image background change
-      setVideoSourceLink("");
-      setHeroSectionStyle({
-        ...transitionStyle,
-        backgroundImage: `url(${randomBackground.source})`,
-        backgroundSize: "cover",
-        position: "relative",
-        width: "100%",
-        height: "100vh",
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch((error) => {
-        if (error.name !== "AbortError") {
-          console.error("Video play error:", error);
-        }
-      });
-    }
-  }, [videoSourceLink]);
-
-  useEffect(() => {
-    changeBackground();
-  }, []);
-
   return (
     <section
       id="hero"
       className="d-flex flex-column justify-content-center"
-      style={heroSectionStyle}
+      style={{ position: "relative" }}
     >
-      <video
-        id="hero-background-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        ref={videoRef}
-      >
-        <source id="video-source" src={videoSourceLink} type="video/mp4" />
-        {/* Fallback content for non-supported browsers */}
-        Your browser does not support the video tag.
-      </video>
+      <div className="hero-background">
+        {isImage && currentBackground.source && (
+          <Image
+            src={currentBackground.source}
+            alt="Hero background"
+            fill
+            priority // Preload the image since it's in the hero section
+          />
+        )}
+        {isVideo && currentBackground.source && (
+          <Video
+            src={currentBackground.source}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls={false}
+            id="hero-background-video"
+            style={{
+              objectFit: "cover",
+              position: "inherit",
+              aspectRatio: "auto",
+            }}
+          />
+        )}
+      </div>
       <div
         className="container"
         id="hometext"
         data-aos="zoom-in"
         data-aos-delay="100"
       >
-        <div id="herotextbox" style={{ justifyContent: "left" }}>
+        <div id="herotextbox" style={{ justifyContent: "left", width: "70%" }}>
           <h1>{heroData?.name}</h1>
           <p>
             I'm
