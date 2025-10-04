@@ -18,9 +18,12 @@ export const useRandomBackground = () => {
     do {
       newBackground =
         backgrounds[Math.floor(Math.random() * backgrounds.length)];
-    } while (newBackground.source === currentBackground.source);
+    } while (
+      backgrounds.length > 1 &&
+      newBackground.source === currentBackground.source
+    );
     setCurrentBackground(newBackground);
-  }, []);
+  }, [currentBackground.source]);
 
   return { currentBackground, changeBackground };
 };
