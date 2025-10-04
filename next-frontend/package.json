@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack --port 5173 & npx next-video sync -w",
-    "build": "next build --turbopack",
+    "build": "next build",
+    "postbuild": "npx next-video sync",
     "start": "next start",
     "lint": "eslint"
   },
