@@ -11,6 +11,7 @@ const FactsSection = () => {
   if (!factsData) {
     return <></>;
   }
+
   const { title, content, facts } = factsData[0];
 
   return (

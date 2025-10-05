@@ -2,6 +2,7 @@
 
 import "./aboutsection.styles.css";
 import "./About.scss";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { urlFor } from "../../../client.js";
@@ -20,9 +21,9 @@ const AboutSection = () => {
       <div className="container">
         <div className="section-title">
           <h2>ABOUT</h2>
-          {hero.aboutDescription && (
+          {hero[0].aboutDescription && (
             <PortableText
-              value={hero.aboutDescription}
+              value={hero[0].aboutDescription}
               components={{
                 block: {
                   // Customize rendering of "normal" block styles
@@ -41,7 +42,13 @@ const AboutSection = () => {
               className="app__profile-item"
               key={about.title + index}
             >
-              <img src={urlFor(about.imgUrl)} alt={about.title} />
+              <Image
+                src={urlFor(about.imgUrl).url()}
+                alt={about.title}
+                width={170}
+                height={170}
+                className="app__profile-img"
+              />
               <h2 className="bold-text" style={{ marginTop: 20 }}>
                 {about.title}
               </h2>
