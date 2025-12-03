@@ -17,7 +17,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "aos": "^2.3.4",
     "framer-motion": "^12.23.22",
-    "next": "15.5.4",
+    "next": "15.5.7",
     "next-video": "^2.5.0",
     "react": "19.1.0",
     "react-bootstrap": "^2.10.10",
