@@ -3173,10 +3173,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-swiper@^11.1.12:
-  version "11.2.7"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.2.7.tgz#9657e467047cf098b6c9a79d1864bc6810d2e4fb"
-  integrity sha512-oPJCwdcjFMw3SoBM7AdB1RJzjT7JaE4Mg7TWceTmJ/i2OtF8L01Ct+5eOf48nG3trgR0wXFekWdfnTdl0eg6Pg==
+swiper@^12.1.2:
+  version "12.1.2"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-12.1.2.tgz#39eaad0c088def66a7eb8f6bae1439384586ab90"
+  integrity sha512-4gILrI3vXZqoZh71I1PALqukCFgk+gpOwe1tOvz5uE9kHtl2gTDzmYflYCwWvR4LOvCrJi6UEEU+gnuW5BtkgQ==
 
 through2@^4.0.2:
   version "4.0.2"
